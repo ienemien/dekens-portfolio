@@ -1,19 +1,47 @@
 <script setup lang="ts">
-import type Post from '@/model/Post';
-import PostSummary from '@/components/PostSummary.vue';
-import { ref, onMounted } from 'vue';
+import type Post from "@/model/Post";
+import PostSummary from "@/components/PostSummary.vue";
+import { ref, onMounted, watch } from "vue";
+import { useRoute, RouterLink } from "vue-router";
 
-const posts = ref<Post[]>([]);
-const URL = '/api/posts?page=1&per_page=5';
+const route = useRoute();
+let posts = ref<Post[]>([]);
+const totalPages = ref(1);
+
+watch(
+  () => route.query.page,
+  async (newPageNr) => {
+    await fetchPosts(newPageNr as string);
+  }
+);
 
 onMounted(async () => {
-  posts.value = await (await fetch(URL)).json();
-})
+  fetchPosts(route.query.page as string);
+});
+
+async function fetchPosts(
+  pageNr: string
+): Promise<void> {
+  const POSTS_URL = `/api/posts?page=${pageNr}&per_page=10`;
+  const response = await fetch(POSTS_URL);
+
+  if (response.status === 200) {
+    posts.value = await response.json();
+    totalPages.value = parseInt(response.headers.get("x-wp-totalpages") ?? "1");
+  }
+}
 </script>
 
 <template>
   <main>
     <h1>Blog</h1>
-    <PostSummary v-for="post in posts" :key="post.id" :post="post"/>
+    <PostSummary v-for="post in posts" :key="post.id" :post="post" />
+    <ul>
+      <li v-for="i in totalPages" v-bind:key="i">
+        <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
+          i
+        }}</RouterLink>
+      </li>
+    </ul>
   </main>
 </template>

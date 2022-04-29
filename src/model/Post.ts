@@ -10,8 +10,8 @@ interface link {
 
 export default interface Post {
   id: number;
-  date: Date;
-  dateGmt: Date;
+  date: string;
+  dateGmt: string;
   guid: {
     rendered: string;
   };

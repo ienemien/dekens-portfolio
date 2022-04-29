@@ -5,7 +5,8 @@ import { ref, onMounted, watch } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 
 const route = useRoute();
-let posts = ref<Post[]>([]);
+const POSTS_PER_PAGE = 10;
+const posts = ref<Post[]>([]);
 const totalPages = ref(1);
 
 watch(
@@ -22,7 +23,7 @@ onMounted(async () => {
 async function fetchPosts(
   pageNr: string
 ): Promise<void> {
-  const POSTS_URL = `/api/posts?page=${pageNr}&per_page=10`;
+  const POSTS_URL = `/api/posts?page=${pageNr ?? 1}&per_page=${POSTS_PER_PAGE}`;
   const response = await fetch(POSTS_URL);
 
   if (response.status === 200) {

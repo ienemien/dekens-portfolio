@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import PostView from "../views/PostView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,17 +10,44 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/post/:id",
-      name: "post",
-      component: PostView,
+      path: "/werk",
+      name: "work",
+      component: () => import("../views/WorkView.vue"),
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
+      path: "/educatie",
+      name: "education",
+      component: () => import("../views/EducationView.vue"),
+    },
+    {
+      path: "/atelier",
+      name: "atelier",
+      component: () => import("../views/AtelierView.vue"),
+    },
+    {
+      path: "/winkel",
+      name: "shop",
+      component: () => import("../views/ShopView.vue"),
+    },
+    {
+      path: "/blog",
+      name: "blog",
+      component: () => import("../views/BlogView.vue"),
+    },
+    {
+      path: "/post/:id",
+      name: "post",
+      component: () => import("../views/PostDetailView.vue"),
+    },
+    {
+      path: "/cv",
+      name: "cv",
+      component: () => import("../views/CurriculumView.vue"),
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: () => import("../views/ContactView.vue"),
     },
   ],
 });

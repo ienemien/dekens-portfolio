@@ -8,7 +8,7 @@ interface link {
   templated?: boolean;
 }
 
-export default interface Post {
+export default interface BlogPost {
   id: number;
   date: string;
   dateGmt: string;

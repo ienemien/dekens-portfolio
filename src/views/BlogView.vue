@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import type Post from "@/model/Post";
-import PostSummary from "@/components/PostSummary.vue";
+import type Post from "@/model/BlogPost";
+import PostSummary from "@/components/BlogPostSummary.vue";
 import { ref, onMounted, watch } from "vue";
 import { useRoute, RouterLink } from "vue-router";
+import type BlogPostResponse from "@/model/BlogPostResponse";
+import BlogPostService from "@/services/BlogPostService";
 
 const route = useRoute();
-const POSTS_PER_PAGE = 10;
+const blogPostService = new BlogPostService();
 const posts = ref<Post[]>([]);
 const totalPages = ref(1);
 
@@ -23,12 +25,12 @@ onMounted(async () => {
 async function fetchPosts(
   pageNr: string
 ): Promise<void> {
-  const POSTS_URL = `/api/posts?page=${pageNr ?? 1}&per_page=${POSTS_PER_PAGE}`;
-  const response = await fetch(POSTS_URL);
-
-  if (response.status === 200) {
-    posts.value = await response.json();
-    totalPages.value = parseInt(response.headers.get("x-wp-totalpages") ?? "1");
+  try {
+    const response: BlogPostResponse | undefined = await blogPostService.fetchPosts(parseInt(pageNr ?? '1'));
+    posts.value = response?.posts ?? [];
+    totalPages.value = response?.totalPages ?? 0;
+  } catch(err) {
+    alert(err); // TODO: better error handling
   }
 }
 </script>
@@ -40,7 +42,7 @@ async function fetchPosts(
     <ul>
       <li v-for="i in totalPages" v-bind:key="i">
         <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
-          i
+            i
         }}</RouterLink>
       </li>
     </ul>

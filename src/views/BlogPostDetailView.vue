@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type Post from "@/model/Post";
+import type Post from "@/model/BlogPost";
 import dayjs from "dayjs";
 import { ref, onMounted } from "vue";
 import { useRoute, RouterLink } from "vue-router";

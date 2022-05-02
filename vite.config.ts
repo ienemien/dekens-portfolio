@@ -13,11 +13,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'https://www.jojannekedekens.nl/wp-json/wp/v2',
+      "/api": {
+        target: "https://www.jojannekedekens.nl/wp-json/wp/v2",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
-    }
-  }
+    },
+  },
 });

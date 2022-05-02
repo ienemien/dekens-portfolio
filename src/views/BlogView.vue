@@ -22,14 +22,13 @@ onMounted(async () => {
   fetchPosts(route.query.page as string);
 });
 
-async function fetchPosts(
-  pageNr: string
-): Promise<void> {
+async function fetchPosts(pageNr: string): Promise<void> {
   try {
-    const response: BlogPostResponse | undefined = await blogPostService.fetchPosts(parseInt(pageNr ?? '1'));
+    const response: BlogPostResponse | undefined =
+      await blogPostService.fetchPosts(parseInt(pageNr ?? "1"));
     posts.value = response?.posts ?? [];
     totalPages.value = response?.totalPages ?? 0;
-  } catch(err) {
+  } catch (err) {
     alert(err); // TODO: better error handling
   }
 }
@@ -42,7 +41,7 @@ async function fetchPosts(
     <ul>
       <li v-for="i in totalPages" v-bind:key="i">
         <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
-            i
+          i
         }}</RouterLink>
       </li>
     </ul>

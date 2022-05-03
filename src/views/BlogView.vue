@@ -1,47 +1,36 @@
 <script setup lang="ts">
-import type Post from "@/model/BlogPost";
 import PostSummary from "@/components/BlogPostSummary.vue";
-import { ref, onMounted, watch } from "vue";
-import { useRoute, RouterLink } from "vue-router";
-import type BlogPostResponse from "@/model/BlogPostResponse";
-import BlogPostService from "@/services/BlogPostService";
+import { useBlogPostStore } from "@/stores/BlogPostStore";
+import { onMounted, watch } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 
 const route = useRoute();
-const blogPostService = new BlogPostService();
-const posts = ref<Post[]>([]);
-const totalPages = ref(1);
+const blogPostStore = useBlogPostStore();
 
 watch(
   () => route.query.page,
   async (newPageNr) => {
-    await fetchPosts(newPageNr as string);
+    await blogPostStore.fetchPosts(parseInt(newPageNr as string));
   }
 );
 
 onMounted(async () => {
-  fetchPosts(route.query.page as string);
+  blogPostStore.fetchPosts(parseInt((route.query.page as string) ?? 1));
 });
-
-async function fetchPosts(pageNr: string): Promise<void> {
-  try {
-    const response: BlogPostResponse | undefined =
-      await blogPostService.fetchPosts(parseInt(pageNr ?? "1"));
-    posts.value = response?.posts ?? [];
-    totalPages.value = response?.totalPages ?? 0;
-  } catch (err) {
-    alert(err); // TODO: better error handling
-  }
-}
 </script>
 
 <template>
   <main>
     <h1>Blog</h1>
-    <PostSummary v-for="post in posts" :key="post.id" :post="post" />
+    <PostSummary
+      v-for="post in blogPostStore.activePosts"
+      :key="post.id"
+      :post="post"
+    />
     <ul>
-      <li v-for="i in totalPages" v-bind:key="i">
+      <li v-for="i in blogPostStore.totalPages" v-bind:key="i">
         <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
-          i
+            i
         }}</RouterLink>
       </li>
     </ul>

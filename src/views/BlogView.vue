@@ -10,7 +10,9 @@ const blogPostStore = useBlogPostStore();
 watch(
   () => route.query.page,
   async (newPageNr) => {
-    await blogPostStore.fetchPosts(parseInt(newPageNr as string));
+    if (newPageNr) {
+      await blogPostStore.fetchPosts(parseInt(newPageNr as string));
+    }
   }
 );
 
@@ -22,11 +24,7 @@ onMounted(async () => {
 <template>
   <main>
     <h1>Blog</h1>
-    <PostSummary
-      v-for="post in blogPostStore.activePosts"
-      :key="post.id"
-      :post="post"
-    />
+    <PostSummary v-for="post in blogPostStore.activePosts" :key="post.id" :post="post" />
     <ul>
       <li v-for="i in blogPostStore.totalPages" v-bind:key="i">
         <RouterLink :to="{ name: 'blog', query: { page: i } }">{{

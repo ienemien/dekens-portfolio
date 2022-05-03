@@ -18,9 +18,7 @@ export const useBlogPostStore = defineStore({
     async fetchPosts(pageNr: number): Promise<void> {
       this.currentPage = pageNr;
 
-      if (this.activePosts) {
-        return;
-      } else {
+      if (this.activePosts?.length < 1) {
         const postService = new BlogPostService();
         const response = await postService.fetchPosts(pageNr);
         this.pages.push({ pageNr, posts: response?.posts ?? [] });

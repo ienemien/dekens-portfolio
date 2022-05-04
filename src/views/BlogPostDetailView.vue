@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type Post from "@/model/BlogPost";
 import BlogPostService from "@/services/BlogPostService";
+import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
@@ -8,7 +9,12 @@ import { RouterLink, useRoute } from "vue-router";
 const postService = new BlogPostService();
 const post = ref<Post>();
 const route = useRoute();
-let postDate = ref("");
+const postDate = computed(() =>
+  dayjs(post?.value?.date).format("DD MMMM YYYY")
+);
+const postDateTime = computed(() =>
+  dayjs(post?.value?.date).format("YYYY-MM-DD")
+);
 
 onMounted(async () => {
   try {
@@ -16,7 +22,6 @@ onMounted(async () => {
     post.value = await postService.fetchPost(
       Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
     );
-    postDate.value = dayjs(post?.value?.date).format("DD MMMM YYYY");
   } catch (err) {
     alert(err); // TODO: proper error handling
   }
@@ -25,8 +30,10 @@ onMounted(async () => {
 
 <template>
   <main>
-    <h2 v-html="post?.title.rendered"></h2>
-    <h3>{{ postDate }}</h3>
+    <header>
+      <h2 v-html="post?.title.rendered"></h2>
+      <time :datetime="postDateTime">{{ postDate }}</time>
+    </header>
     <p v-html="post?.content.rendered"></p>
     <RouterLink to="/blog">Terug</RouterLink>
   </main>

@@ -19,26 +19,33 @@ import HeaderNav from "@/components/HeaderNav.vue";
 <style scoped>
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr repeat(6, minmax(auto, 10em)) 1fr;
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
 }
 
 header {
+  position: fixed;
+  width: 100%;
   display: grid;
-  grid-column: span 8;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  padding: 20px 0;
+  box-shadow: 0 3px 5px rgb(230, 230, 230);
+  background-color: white;
+  z-index: 20;
 }
 
 header h1 {
-  grid-column: 1 / span 1;
+  margin: 0;
+  grid-column: 2 / span 3;
 }
 
 header nav {
   justify-self: right;
-  grid-column: 2 / span 2;
+  grid-column: 5 / span 3;
 }
 
 main {
-  grid-column: 1 / span 8;
+  padding-top: 100px;
+  grid-column: 2 / span 6;
 }
 </style>

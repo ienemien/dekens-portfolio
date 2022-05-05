@@ -23,11 +23,15 @@ onMounted(async () => {
 
 <template>
   <h1>Blog</h1>
-  <BlogPostSummary
-    v-for="post in blogPostStore.activePosts"
-    :key="post.id"
-    :post="post"
-  />
+  <ul class="blogpost-list">
+    <li
+      class="blogpost-item"
+      v-for="post in blogPostStore.activePosts"
+      :key="post.id"
+    >
+      <BlogPostSummary :post="post" />
+    </li>
+  </ul>
   <nav>
     <ul>
       <li v-for="i in blogPostStore.totalPages" v-bind:key="i">
@@ -40,7 +44,17 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.blogpost-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+}
 
-
-
+.blogpost-item {
+  list-style: none;
+  border-radius: 5px;
+  border: 1pt solid lightgray;
+  box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
+  padding: 15px;
+}
 </style>

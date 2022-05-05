@@ -45,7 +45,7 @@ export default interface BlogPost {
   categories: number[];
   tags: string[];
   jetpackFeaturedMediaUrl: string;
-  links: {
+  _links: {
     self: link[];
     collection: link[];
     about: link[];
@@ -53,7 +53,7 @@ export default interface BlogPost {
     replies: link[];
     versionHistory: link[];
     predecessorVersion: link[];
-    wpAttachment: link[];
+    "wp:attachment": link[];
     wpTerm: link[];
     curies: link[];
   };

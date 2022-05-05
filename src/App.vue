@@ -1,43 +1,44 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
+import HeaderNav from "@/components/HeaderNav.vue";
 </script>
 
 <template>
-  <header>
-    <h1>Jojanneke Dekens - Verwonderaar</h1>
-    <nav>
-      <ul>
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/werk">Werk</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/educatie">Educatie</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/atelier">Atelier</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/winkel">Winkel</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/cv">CV</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/contact">Contact</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/blog">Blog</RouterLink>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <div class="grid-container">
+    <header>
+      <h1>Jojanneke Dekens</h1>
+      <HeaderNav></HeaderNav>
+    </header>
 
-  <main>
-    <RouterView />
-  </main>
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
 
-<style></style>
+<style scoped>
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr repeat(6, minmax(auto, 10em)) 1fr;
+  grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
+}
+
+header {
+  display: grid;
+  grid-column: span 8;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+header h1 {
+  grid-column: 1 / span 1;
+}
+
+header nav {
+  justify-self: right;
+  grid-column: 2 / span 2;
+}
+
+main {
+  grid-column: 1 / span 8;
+}
+</style>

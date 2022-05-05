@@ -17,7 +17,7 @@ const postDateTime = dayjs(props.post?.date).format("YYYY-MM-DD");
       <h2 v-html="post?.title.rendered"></h2>
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
-    <span v-html="post?.excerpt.rendered"></span>
+    <p v-html="post?.excerpt.rendered"></p>
     <RouterLink :to="{ name: 'post', params: { id: post?.id } }"
       >Lees verder</RouterLink
     >

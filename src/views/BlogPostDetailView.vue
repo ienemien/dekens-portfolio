@@ -29,14 +29,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main>
-    <header>
-      <h2 v-html="post?.title.rendered"></h2>
-      <time :datetime="postDateTime">{{ postDate }}</time>
-    </header>
-    <p v-html="post?.content.rendered"></p>
-    <RouterLink to="/blog">Terug</RouterLink>
-  </main>
+  <header>
+    <h2 v-html="post?.title.rendered"></h2>
+    <time :datetime="postDateTime">{{ postDate }}</time>
+  </header>
+  <p v-html="post?.content.rendered"></p>
+  <RouterLink to="/blog">Terug</RouterLink>
 </template>
 
-<style></style>
+<style>
+</style>

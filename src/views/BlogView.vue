@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PostSummary from "@/components/BlogPostSummary.vue";
+import BlogPostSummary from "@/components/BlogPostSummary.vue";
 import { useBlogPostStore } from "@/stores/BlogPostStore";
 import { onMounted, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
@@ -23,7 +23,7 @@ onMounted(async () => {
 
 <template>
   <h1>Blog</h1>
-  <PostSummary
+  <BlogPostSummary
     v-for="post in blogPostStore.activePosts"
     :key="post.id"
     :post="post"
@@ -38,3 +38,9 @@ onMounted(async () => {
     </ul>
   </nav>
 </template>
+
+<style scoped>
+
+
+
+</style>

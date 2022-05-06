@@ -24,11 +24,7 @@ onMounted(async () => {
 <template>
   <h1>Blog</h1>
   <ul class="blogpost-list">
-    <li
-      class="blogpost-item"
-      v-for="post in blogPostStore.activePosts"
-      :key="post.id"
-    >
+    <li class="blogpost-item" v-for="post in blogPostStore.activePosts" :key="post.id">
       <BlogPostSummary :post="post" />
     </li>
   </ul>
@@ -36,7 +32,7 @@ onMounted(async () => {
     <ul>
       <li v-for="i in blogPostStore.totalPages" v-bind:key="i">
         <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
-          i
+            i
         }}</RouterLink>
       </li>
     </ul>
@@ -46,7 +42,7 @@ onMounted(async () => {
 <style scoped>
 .blogpost-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 40px;
 }
 
@@ -56,5 +52,11 @@ onMounted(async () => {
   border: 1pt solid lightgray;
   box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
   padding: 15px;
+}
+
+@media screen and (min-width: 740px) {
+  .blogpost-list {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>

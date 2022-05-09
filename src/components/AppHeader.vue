@@ -68,7 +68,7 @@ onUnmounted(() => {
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   position: fixed;
   width: 100%;
@@ -79,126 +79,119 @@ header {
   box-shadow: 0 3px 5px rgb(230, 230, 230);
   background-color: white;
   z-index: 20;
-}
 
-.title {
-  font-size: larger;
-  margin: 0;
-  grid-column: 2 / span 2;
-}
+  .title {
+    font-size: larger;
+    margin: 0;
+    grid-column: 2 / span 2;
+  }
 
-header nav {
-  justify-self: center;
-  grid-column: 2 / span 6;
-  overflow: hidden;
-}
-
-ul {
-  text-align: center;
-  list-style: none;
-  margin: 10px 0;
-}
-
-nav a {
-  font-size: large;
-  text-decoration: none;
-  color: black;
-}
-
-nav a:visited {
-  color: black;
-}
-
-nav li {
-  margin: 2px 5px;
-}
-
-.burger-menu {
-  grid-column: 7;
-  justify-self: right;
-  position: relative;
-  height: 30px;
-  width: 40px;
-  display: block;
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
-  pointer-events: all;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.burger-menu.active {
-  transform: rotate(-180deg);
-}
-
-.burger-line {
-  background-color: black;
-  position: absolute;
-  top: 50%;
-  right: 6px;
-  left: 6px;
-  height: 3px;
-  border-radius: 2px;
-  width: auto;
-  margin-top: -1px;
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
-    opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-    background-color 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.burger-menu.active .burger-line {
-  background-color: darkgray;
-}
-
-.burger-line-1 {
-  -webkit-transform: translateY(-6px);
-  transform: translateY(-6px);
-  top: 40%;
-}
-
-.burger-line-2 {
-  transform-origin: 100% 50%;
-  transform: scaleX(1);
-}
-
-.burger-line-3 {
-  transform: translateY(6px);
-  top: 60%;
-}
-
-.v-enter-active {
-  transition: max-height 0.6s ease-out, opacity 0.4s ease-out;
-}
-
-
-.v-leave-active {
-  transition: max-height 0.3s ease-in, opacity 0.2s ease-in;
-}
-
-.v-enter-from,
-.v-leave-to {
-  max-height: 0;
-  opacity: 0;
-}
-
-.v-enter-to,
-.v-leave-from {
-  max-height: 200px;
-}
-
-/* For bigger screens */
-@media screen and (min-width: 992px) {
   .burger-menu {
-    display: none;
-  }
-
-  li {
-    display: inline;
-  }
-
-  header nav {
+    grid-column: 7;
     justify-self: right;
-    grid-column: 4 / span 4;
+    position: relative;
+    height: 30px;
+    width: 40px;
+    display: block;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    pointer-events: all;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &.active {
+      transform: rotate(-180deg);
+    }
+
+    @media screen and (min-width: 992px) {
+      display: none;
+    }
+  }
+
+  .burger-line {
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    left: 6px;
+    height: 3px;
+    border-radius: 2px;
+    width: auto;
+    margin-top: -1px;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+      opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+      background-color 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &-1 {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+      top: 40%;
+    }
+
+    &-2 {
+      transform-origin: 100% 50%;
+      transform: scaleX(1);
+    }
+
+    &-3 {
+      transform: translateY(6px);
+      top: 60%;
+    }
+  }
+
+  .v-enter-active {
+    transition: max-height 0.6s ease-out, opacity 0.4s ease-out;
+  }
+
+
+  .v-leave-active {
+    transition: max-height 0.3s ease-in, opacity 0.2s ease-in;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .v-enter-to,
+  .v-leave-from {
+    max-height: 200px;
+  }
+
+  nav {
+    justify-self: center;
+    grid-column: 2 / span 6;
+    overflow: hidden;
+
+    @media screen and (min-width: 992px) {
+      justify-self: right;
+      grid-column: 4 / span 4;
+    }
+
+    ul {
+      text-align: center;
+      list-style: none;
+      margin: 10px 0;
+
+      li {
+        margin: 2px 5px;
+
+        @media screen and (min-width: 992px) {
+          display: inline;
+        }
+
+        a {
+          font-size: large;
+          text-decoration: none;
+          color: black;
+
+          &:visited {
+            color: black;
+          }
+        }
+      }
+    }
   }
 }
 </style>

@@ -1,17 +1,32 @@
 <script setup lang="ts">
-import { ref } from "@vue/runtime-dom";
+import { onMounted, onUnmounted, ref } from "@vue/runtime-dom";
 import { RouterLink } from "vue-router";
 
-const showMenu = ref(false);
+const isWindowSizeLarge = () => window.innerWidth >= 992;
+const showMenu = ref(isWindowSizeLarge());
 
 function toggleShowMenu() {
-  showMenu.value = !showMenu.value;
+  if (!isWindowSizeLarge()) {
+    showMenu.value = !showMenu.value;
+  }
 }
+
+function onWindowResize() {
+  showMenu.value = isWindowSizeLarge();
+}
+
+onMounted(() => {
+  window.addEventListener("resize", onWindowResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", onWindowResize);
+});
 </script>
 
 <template>
   <header>
-    <h1>Jojanneke Dekens</h1>
+    <h1 class="title">Jojanneke Dekens</h1>
     <button class="burger-menu" :class="{
       'active': showMenu
     }" @click="toggleShowMenu">
@@ -59,15 +74,17 @@ header {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
+  align-items: center;
   padding: 20px 0;
   box-shadow: 0 3px 5px rgb(230, 230, 230);
   background-color: white;
   z-index: 20;
 }
 
-header h1 {
+.title {
+  font-size: larger;
   margin: 0;
-  grid-column: 2 / span 3;
+  grid-column: 2 / span 2;
 }
 
 header nav {
@@ -170,18 +187,18 @@ nav li {
 }
 
 /* For bigger screens */
-@media screen and (min-width: 740px) {
+@media screen and (min-width: 992px) {
   .burger-menu {
     display: none;
   }
 
-  ul {
+  li {
     display: inline;
   }
 
   header nav {
     justify-self: right;
-    grid-column: 2 / span 6;
+    grid-column: 4 / span 4;
   }
 }
 </style>

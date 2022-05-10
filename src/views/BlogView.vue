@@ -2,7 +2,8 @@
 import BlogPostSummary from "@/components/BlogPostSummary.vue";
 import { useBlogPostStore } from "@/stores/BlogPostStore";
 import { onMounted, watch } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
+import AppPagination from "../components/AppPagination.vue";
 
 const route = useRoute();
 const blogPostStore = useBlogPostStore();
@@ -28,15 +29,8 @@ onMounted(async () => {
       <BlogPostSummary :post="post" />
     </li>
   </ul>
-  <nav>
-    <ul>
-      <li v-for="i in blogPostStore.totalPages" v-bind:key="i">
-        <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
-            i
-        }}</RouterLink>
-      </li>
-    </ul>
-  </nav>
+  <AppPagination :page-count="blogPostStore.totalPages">
+  </AppPagination>
 </template>
 
 <style scoped>

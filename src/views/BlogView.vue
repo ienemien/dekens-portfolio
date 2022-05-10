@@ -20,7 +20,9 @@ watch(
 );
 
 onMounted(async () => {
-  activePage.value = parseInt(route.query.page as string);
+  activePage.value = route.query.page
+    ? parseInt(route.query.page as string)
+    : 1;
   blogPostStore.fetchPosts(activePage.value);
 });
 </script>

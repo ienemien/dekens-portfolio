@@ -8,10 +8,20 @@ const props = defineProps<{
 <template>
     <nav>
         <ul>
+            <li>
+                <RouterLink :to="{ name: 'blog', query: { page: activePage - 1 } }"
+                    :class="{ disabled: activePage === 1 }">
+                    &#10094; </RouterLink>
+            </li>
             <li v-for="i in pageCount" v-bind:key="i">
                 <RouterLink :to="{ name: 'blog', query: { page: i } }" :class="{ active: (i === activePage) }">{{
                         i
                 }}</RouterLink>
+            </li>
+            <li :class="{ disabled: activePage === pageCount }">
+                <RouterLink :to="{ name: 'blog', query: { page: activePage + 1 } }"
+                    :class="{ disabled: activePage === pageCount }">
+                    &#10095; </RouterLink>
             </li>
         </ul>
     </nav>
@@ -43,6 +53,13 @@ ul {
 
             &.active {
                 background-color: orangered;
+            }
+
+            &.disabled {
+                pointer-events: none;
+                color: lightgray;
+                cursor: not-allowed;
+                border: 1px solid lightgray;
             }
         }
     }

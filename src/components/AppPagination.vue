@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
+    activePage: number;
     pageCount: number;
 }>();
 </script>
@@ -8,7 +9,7 @@ const props = defineProps<{
     <nav>
         <ul>
             <li v-for="i in pageCount" v-bind:key="i">
-                <RouterLink :to="{ name: 'blog', query: { page: i } }">{{
+                <RouterLink :to="{ name: 'blog', query: { page: i } }" :class="{ active: (i === activePage) }">{{
                         i
                 }}</RouterLink>
             </li>
@@ -38,6 +39,10 @@ ul {
 
             &:hover {
                 background-color: lightgray;
+            }
+
+            &.active {
+                background-color: orangered;
             }
         }
     }

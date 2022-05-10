@@ -1,24 +1,27 @@
 <script setup lang="ts">
 import BlogPostSummary from "@/components/BlogPostSummary.vue";
 import { useBlogPostStore } from "@/stores/BlogPostStore";
-import { onMounted, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import AppPagination from "../components/AppPagination.vue";
 
 const route = useRoute();
 const blogPostStore = useBlogPostStore();
+const activePage = ref(1);
 
 watch(
   () => route.query.page,
-  async (newPageNr) => {
+  (newPageNr) => {
     if (newPageNr) {
-      await blogPostStore.fetchPosts(parseInt(newPageNr as string));
+      activePage.value = parseInt(newPageNr as string);
+      blogPostStore.fetchPosts(activePage.value);
     }
   }
 );
 
 onMounted(async () => {
-  blogPostStore.fetchPosts(parseInt((route.query.page as string) ?? 1));
+  activePage.value = parseInt(route.query.page as string);
+  blogPostStore.fetchPosts(activePage.value);
 });
 </script>
 
@@ -29,7 +32,7 @@ onMounted(async () => {
       <BlogPostSummary :post="post" />
     </li>
   </ul>
-  <AppPagination :page-count="blogPostStore.totalPages">
+  <AppPagination :active-page="activePage" :page-count="blogPostStore.totalPages">
   </AppPagination>
 </template>
 

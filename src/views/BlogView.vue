@@ -4,6 +4,7 @@ import { useBlogPostStore } from "@/stores/BlogPostStore";
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import AppPagination from "../components/AppPagination.vue";
+import AppLoader from "../components/AppLoader.vue";
 
 const route = useRoute();
 const blogPostStore = useBlogPostStore();
@@ -11,10 +12,10 @@ const activePage = ref(1);
 
 watch(
   () => route.query.page,
-  (newPageNr) => {
+  async (newPageNr) => {
     if (newPageNr) {
       activePage.value = parseInt(newPageNr as string);
-      blogPostStore.fetchPosts(activePage.value);
+      await blogPostStore.fetchPosts(activePage.value);
     }
   }
 );
@@ -23,25 +24,19 @@ onMounted(async () => {
   activePage.value = route.query.page
     ? parseInt(route.query.page as string)
     : 1;
-  blogPostStore.fetchPosts(activePage.value);
+  await blogPostStore.fetchPosts(activePage.value);
 });
 </script>
 
 <template>
   <h1>Blog</h1>
-  <ul class="blogpost-list">
-    <li
-      class="blogpost-item"
-      v-for="post in blogPostStore.activePosts"
-      :key="post.id"
-    >
+  <AppLoader></AppLoader>
+  <ul v-if="!blogPostStore.loading" class="blogpost-list">
+    <li class="blogpost-item" v-for="post in blogPostStore.activePosts" :key="post.id">
       <BlogPostSummary :post="post" />
     </li>
   </ul>
-  <AppPagination
-    :active-page="activePage"
-    :page-count="blogPostStore.totalPages"
-  >
+  <AppPagination :active-page="activePage" :page-count="blogPostStore.totalPages">
   </AppPagination>
 </template>
 

@@ -8,6 +8,7 @@ export const useBlogPostStore = defineStore({
     pages: [{ pageNr: 0, posts: [] as BlogPost[] }],
     totalPages: 0,
     currentPage: 0,
+    loading: false,
   }),
   getters: {
     activePosts: (state) =>
@@ -16,6 +17,7 @@ export const useBlogPostStore = defineStore({
   },
   actions: {
     async fetchPosts(pageNr: number): Promise<void> {
+      this.loading = true;
       this.currentPage = pageNr;
 
       if (this.activePosts?.length < 1) {
@@ -24,6 +26,7 @@ export const useBlogPostStore = defineStore({
         this.pages.push({ pageNr, posts: response?.posts ?? [] });
         this.totalPages = response?.totalPages ?? 0;
       }
+      this.loading = false;
     },
   },
 });

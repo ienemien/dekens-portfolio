@@ -27,9 +27,13 @@ onUnmounted(() => {
 <template>
   <header>
     <h1 class="title">Jojanneke Dekens</h1>
-    <button class="burger-menu" :class="{
-      'active': showMenu
-    }" @click="toggleShowMenu">
+    <button
+      class="burger-menu"
+      :class="{
+        active: showMenu,
+      }"
+      @click="toggleShowMenu"
+    >
       <span class="burger-line burger-line-1"></span>
       <span class="burger-line burger-line-2"></span>
       <span class="burger-line burger-line-3"></span>
@@ -65,7 +69,6 @@ onUnmounted(() => {
       </nav>
     </Transition>
   </header>
-
 </template>
 
 <style scoped lang="scss">
@@ -142,7 +145,6 @@ header {
   .v-enter-active {
     transition: max-height 0.6s ease-out, opacity 0.4s ease-out;
   }
-
 
   .v-leave-active {
     transition: max-height 0.3s ease-in, opacity 0.2s ease-in;

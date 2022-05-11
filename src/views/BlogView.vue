@@ -30,13 +30,20 @@ onMounted(async () => {
 
 <template>
   <h1>Blog</h1>
-  <AppLoader></AppLoader>
+  <AppLoader v-if="blogPostStore.loading"></AppLoader>
   <ul v-if="!blogPostStore.loading" class="blogpost-list">
-    <li class="blogpost-item" v-for="post in blogPostStore.activePosts" :key="post.id">
+    <li
+      class="blogpost-item"
+      v-for="post in blogPostStore.activePosts"
+      :key="post.id"
+    >
       <BlogPostSummary :post="post" />
     </li>
   </ul>
-  <AppPagination :active-page="activePage" :page-count="blogPostStore.totalPages">
+  <AppPagination
+    :active-page="activePage"
+    :page-count="blogPostStore.totalPages"
+  >
   </AppPagination>
 </template>
 

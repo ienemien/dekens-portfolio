@@ -26,7 +26,7 @@ export const useBlogPostStore = defineStore({
         this.pages.push({ pageNr, posts: response?.posts ?? [] });
         this.totalPages = response?.totalPages ?? 0;
       }
-      this.loading = false;
+      setTimeout(() => (this.loading = false), 1000);
     },
   },
 });

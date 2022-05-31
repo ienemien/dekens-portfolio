@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
+  routeName: string;
   activePage: number;
   pageCount: number;
 }>();
@@ -10,7 +11,7 @@ const props = defineProps<{
     <ul>
       <li>
         <RouterLink
-          :to="{ name: 'blog', query: { page: 1 } }"
+          :to="{ name: routeName, query: { page: 1 } }"
           :class="{ disabled: activePage === 1 }"
         >
           &#10094;&#10094;
@@ -18,7 +19,7 @@ const props = defineProps<{
       </li>
       <li>
         <RouterLink
-          :to="{ name: 'blog', query: { page: activePage - 1 } }"
+          :to="{ name: routeName, query: { page: activePage - 1 } }"
           :class="{ disabled: activePage === 1 }"
         >
           &#10094;
@@ -29,7 +30,7 @@ const props = defineProps<{
       </li>
       <li :class="{ disabled: activePage === pageCount }">
         <RouterLink
-          :to="{ name: 'blog', query: { page: activePage + 1 } }"
+          :to="{ name: routeName, query: { page: activePage + 1 } }"
           :class="{ disabled: activePage === pageCount }"
         >
           &#10095;
@@ -51,6 +52,7 @@ const props = defineProps<{
 nav {
   display: flex;
   justify-content: center;
+  grid-column: 1 / span 8;
 
   ul {
     list-style: none;

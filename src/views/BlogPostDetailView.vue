@@ -1,20 +1,27 @@
 <script setup lang="ts">
 import type Post from "@/model/BlogPost";
 import BlogPostService from "@/services/BlogPostService";
+import { useBlogPostStore } from "@/stores/BlogPostStore";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const postService = new BlogPostService();
 const post = ref<Post>();
 const route = useRoute();
+const router = useRouter();
+const postStore = useBlogPostStore();
 const postDate = computed(() =>
   dayjs(post?.value?.date).format("DD MMMM YYYY")
 );
 const postDateTime = computed(() =>
   dayjs(post?.value?.date).format("YYYY-MM-DD")
 );
+
+function goBack() {
+  router.push({ name: "blog", query: { page: postStore.currentPage } });
+}
 
 onMounted(async () => {
   try {
@@ -35,8 +42,6 @@ onMounted(async () => {
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
     <p v-html="post?.content.rendered"></p>
-    <RouterLink to="/blog">Terug</RouterLink>
+    <a @click="goBack">Terug</a>
   </article>
 </template>
-
-<style scoped></style>

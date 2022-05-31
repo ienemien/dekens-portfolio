@@ -7,7 +7,7 @@ export const useBlogPostStore = defineStore({
   state: () => ({
     pages: [{ pageNr: 0, posts: [] as BlogPost[] }],
     totalPages: 0,
-    currentPage: 0,
+    currentPage: 1,
     loading: false,
   }),
   getters: {

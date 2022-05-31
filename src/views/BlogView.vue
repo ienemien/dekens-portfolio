@@ -41,30 +41,29 @@ onMounted(async () => {
     </li>
   </ul>
   <AppPagination
+    :route-name="'blog'"
     :active-page="activePage"
     :page-count="blogPostStore.totalPages"
   >
   </AppPagination>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .blogpost-list {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 40px;
-}
 
-.blogpost-item {
-  list-style: none;
-  border-radius: 5px;
-  border: 1pt solid lightgray;
-  box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
-  padding: 15px;
-}
-
-@media screen and (min-width: 740px) {
-  .blogpost-list {
+  @media screen and (min-width: 740px) {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .blogpost-item {
+    list-style: none;
+    border-radius: 5px;
+    border: 1pt solid lightgray;
+    box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
+    padding: 15px;
   }
 }
 </style>

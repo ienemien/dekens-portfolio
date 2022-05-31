@@ -81,7 +81,7 @@ header {
   padding: 20px 0;
   box-shadow: 0 3px 5px rgb(230, 230, 230);
   background-color: white;
-  z-index: 20;
+  z-index: 5;
 
   .title {
     font-size: larger;

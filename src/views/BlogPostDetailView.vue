@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import type Post from "@/model/BlogPost";
+import type BlogPost from "@/model/BlogPost";
+import type BlogPostMedia from "@/model/BlogPostMedia";
 import BlogPostService from "@/services/BlogPostService";
 import { useBlogPostStore } from "@/stores/BlogPostStore";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import VueEasyLightbox from "vue-easy-lightbox";
 
 const postService = new BlogPostService();
-const post = ref<Post>();
+const post = ref<BlogPost>();
+const media = ref<BlogPostMedia[]>([]);
+const lightboxVisible = ref<boolean>(false);
+const lightboxIndex = ref<number>(0);
 const route = useRoute();
 const router = useRouter();
 const postStore = useBlogPostStore();
+
 const postDate = computed(() =>
   dayjs(post?.value?.date).format("DD MMMM YYYY")
 );
@@ -19,9 +25,11 @@ const postDateTime = computed(() =>
   dayjs(post?.value?.date).format("YYYY-MM-DD")
 );
 
-function goBack() {
-  router.push({ name: "blog", query: { page: postStore.currentPage } });
-}
+const lightboxImgs = computed(() =>
+  media.value.map((img) => {
+    return { title: img.title.rendered, src: img.source_url };
+  })
+);
 
 onMounted(async () => {
   try {
@@ -29,10 +37,31 @@ onMounted(async () => {
     post.value = await postService.fetchPost(
       Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
     );
+    await fetchMedia();
   } catch (err) {
     alert(err); // TODO: proper error handling
   }
 });
+
+function goBack() {
+  router.push({ name: "blog", query: { page: postStore.currentPage } });
+}
+
+async function fetchMedia() {
+  const mediaUrl = post.value?._links["wp:attachment"]?.[0].href;
+  if (mediaUrl) {
+    media.value = await (await fetch(mediaUrl)).json();
+  }
+}
+
+function showLightbox(index?: number) {
+  lightboxVisible.value = true;
+  lightboxIndex.value = index ?? 0;
+}
+
+function hideLightbox() {
+  lightboxVisible.value = false;
+}
 </script>
 
 <template>
@@ -41,7 +70,36 @@ onMounted(async () => {
       <h2 v-html="post?.title.rendered"></h2>
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
+    <div class="gallery">
+      <template v-for="(image, index) in media" :key="index">
+        <img :src="image.media_details.sizes['project-thumbnail'].source_url ?? image.source_url"
+          @click="showLightbox(index)" />
+      </template>
+      <VueEasyLightbox scrollDisabled escDisabled moveDisabled :index="lightboxIndex" :visible="lightboxVisible"
+        :imgs="lightboxImgs" @hide="hideLightbox">
+      </VueEasyLightbox>
+    </div>
     <p v-html="post?.content.rendered"></p>
-    <a @click="goBack">Terug</a>
+    <a class="button-back" @click="goBack">Terug</a>
   </article>
 </template>
+
+<style lang="scss" scoped>
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  img {
+    max-height: 100px;
+    width: auto;
+    overflow: hidden;
+    margin: 2px;
+    cursor: pointer;
+  }
+}
+
+.button-back {
+  cursor: pointer;
+}
+</style>

@@ -12,6 +12,7 @@
     "dayjs": "^1.11.1",
     "pinia": "^2.0.13",
     "vue": "^3.2.33",
+    "vue-easy-lightbox": "^1.4.1",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {

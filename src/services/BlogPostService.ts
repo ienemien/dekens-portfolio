@@ -1,5 +1,5 @@
 import type BlogPost from "@/model/BlogPost";
-import type BlogPostResponse from "@/model/BlogPostResponse";
+import type PostResponse from "@/model/PostResponse";
 
 export default class BlogPostService {
   private static POSTS_URL = "/api/posts";
@@ -8,10 +8,10 @@ export default class BlogPostService {
   public async fetchPosts(
     page: number,
     perPage?: number
-  ): Promise<BlogPostResponse | undefined> {
-    const blogPostResponse: BlogPostResponse = {
+  ): Promise<PostResponse | undefined> {
+    const blogPostResponse: PostResponse = {
       totalPages: 0,
-      totalPosts: 0,
+      total: 0,
       posts: [],
     };
     const postsPerPage = perPage ?? BlogPostService.DEFAULT_POSTS_PER_PAGE;
@@ -24,7 +24,7 @@ export default class BlogPostService {
       blogPostResponse.totalPages = parseInt(
         response.headers.get("x-wp-totalpages") ?? "0"
       );
-      blogPostResponse.totalPosts = parseInt(
+      blogPostResponse.total = parseInt(
         response.headers.get("x-wp-total") ?? "0"
       );
       return blogPostResponse;

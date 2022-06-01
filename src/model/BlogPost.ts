@@ -56,5 +56,7 @@ export default interface BlogPost {
     "wp:attachment": link[];
     wpTerm: link[];
     curies: link[];
+    "wp:featuredmedia": link[];
+    "wp:term": link[];
   };
 }

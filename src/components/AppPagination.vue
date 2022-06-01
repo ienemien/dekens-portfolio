@@ -10,18 +10,12 @@ const props = defineProps<{
   <nav>
     <ul>
       <li>
-        <RouterLink
-          :to="{ name: routeName, query: { page: 1 } }"
-          :class="{ disabled: activePage === 1 }"
-        >
+        <RouterLink :to="{ name: routeName, query: { page: 1 } }" :class="{ disabled: activePage === 1 }">
           &#10094;&#10094;
         </RouterLink>
       </li>
       <li>
-        <RouterLink
-          :to="{ name: routeName, query: { page: activePage - 1 } }"
-          :class="{ disabled: activePage === 1 }"
-        >
+        <RouterLink :to="{ name: routeName, query: { page: activePage - 1 } }" :class="{ disabled: activePage === 1 }">
           &#10094;
         </RouterLink>
       </li>
@@ -29,18 +23,14 @@ const props = defineProps<{
         <span>{{ activePage }}/{{ pageCount }}</span>
       </li>
       <li :class="{ disabled: activePage === pageCount }">
-        <RouterLink
-          :to="{ name: routeName, query: { page: activePage + 1 } }"
-          :class="{ disabled: activePage === pageCount }"
-        >
+        <RouterLink :to="{ name: routeName, query: { page: activePage + 1 } }"
+          :class="{ disabled: activePage === pageCount }">
           &#10095;
         </RouterLink>
       </li>
       <li :class="{ disabled: activePage === pageCount }">
-        <RouterLink
-          :to="{ name: 'blog', query: { page: pageCount } }"
-          :class="{ disabled: activePage === pageCount }"
-        >
+        <RouterLink :to="{ name: routeName, query: { page: pageCount } }"
+          :class="{ disabled: activePage === pageCount }">
           &#10095;&#10095;
         </RouterLink>
       </li>

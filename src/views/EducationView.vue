@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppPagination from "../components/AppPagination.vue";
-import AppLoader from "../components/AppLoader.vue";
+import AppPagination from "@/components/AppPagination.vue";
+import AppLoader from "@/components/AppLoader.vue";
 import ProjectSummary from "@/components/ProjectSummary.vue";
 import { ref } from "@vue/reactivity";
 import type Project from "@/model/Project";

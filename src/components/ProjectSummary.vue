@@ -24,29 +24,26 @@ onMounted(async () => {
 <template>
   <article>
     <header>
-      <h2 v-html="project?.title.rendered"></h2>
-      <img v-if="media" :src="media.media_details.sizes.medium.source_url" />
+      <img v-if="media" :src="media.media_details.sizes['project-archive'].source_url" />
       <time :datetime="postDateTime">{{ postDate }}</time>
+      <h2 v-html="project?.title.rendered"></h2>
     </header>
     <p v-html="project?.excerpt.rendered"></p>
-    <RouterLink :to="{ name: 'project', params: { id: project?.id } }"
-      >Lees verder</RouterLink
-    >
+    <RouterLink :to="{ name: 'project', params: { id: project?.id } }">Lees verder</RouterLink>
   </article>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
   display: grid;
-  grid-template-columns: repeat(3 1fr);
-}
+  justify-items: center;
 
-header h1 {
-  grid-column: 1 / span 1;
-}
+  time {
+    margin-top: 10px;
+  }
 
-header img {
-  justify-self: right;
-  grid-column: 3 / span 1;
+  img {
+    max-width: 300px;
+  }
 }
 </style>

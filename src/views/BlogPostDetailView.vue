@@ -3,6 +3,7 @@ import type BlogPost from "@/model/BlogPost";
 import type PostMedia from "@/model/PostMedia";
 import BlogPostService from "@/services/BlogPostService";
 import { useBlogPostStore } from "@/stores/BlogPostStore";
+import AppBackButton from "@/components/AppBackButton.vue";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
@@ -42,10 +43,6 @@ onMounted(async () => {
     alert(err); // TODO: proper error handling
   }
 });
-
-function goBack() {
-  router.push({ name: "blog", query: { page: postStore.currentPage } });
-}
 
 async function fetchMedia() {
   const mediaUrl = post.value?._links["wp:attachment"]?.[0].href;
@@ -91,8 +88,8 @@ function hideLightbox() {
       >
       </VueEasyLightbox>
     </div>
-    <p v-html="post?.content.rendered"></p>
-    <a class="button-back" @click="goBack">Terug</a>
+    <div class="content" v-html="post?.content.rendered"></div>
+    <AppBackButton></AppBackButton>
   </article>
 </template>
 
@@ -111,7 +108,20 @@ function hideLightbox() {
   }
 }
 
-.button-back {
-  cursor: pointer;
+.content {
+  &:deep(.wp-block-image) {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+
+    img {
+      width: 50vw;
+      height: auto;
+    }
+  }
 }
 </style>

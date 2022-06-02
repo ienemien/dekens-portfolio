@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import type BlogPost from "@/model/BlogPost";
+import type Project from "@/model/Project";
 import type PostMedia from "@/model/PostMedia";
-import BlogPostService from "@/services/BlogPostService";
-import { useBlogPostStore } from "@/stores/BlogPostStore";
+import ProjectService from "@/services/ProjectService";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import VueEasyLightbox from "vue-easy-lightbox";
 
-const postService = new BlogPostService();
-const post = ref<BlogPost>();
+const projectService = new ProjectService();
+const post = ref<Project>();
 const media = ref<PostMedia[]>([]);
 const lightboxVisible = ref<boolean>(false);
 const lightboxIndex = ref<number>(0);
 const route = useRoute();
 const router = useRouter();
-const postStore = useBlogPostStore();
 
 const postDate = computed(() =>
   dayjs(post?.value?.date).format("DD MMMM YYYY")
@@ -34,7 +32,7 @@ const lightboxImgs = computed(() =>
 onMounted(async () => {
   try {
     const routeParamId = route.params["id"];
-    post.value = await postService.fetchPost(
+    post.value = await projectService.fetchProject(
       Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
     );
     await fetchMedia();
@@ -44,7 +42,7 @@ onMounted(async () => {
 });
 
 function goBack() {
-  router.push({ name: "blog", query: { page: postStore.currentPage } });
+  router.back();
 }
 
 async function fetchMedia() {

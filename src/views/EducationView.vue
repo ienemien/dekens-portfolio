@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppPagination from "../components/AppPagination.vue";
 import AppLoader from "../components/AppLoader.vue";
+import ProjectSummary from "@/components/ProjectSummary.vue";
 import { ref } from "@vue/reactivity";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
@@ -33,10 +34,11 @@ onMounted(async () => {
 
 async function fetchProjects() {
   loading.value = true;
-  const response = await projectService.fetchProjects(activePage.value);
+  //todo: only load education projects
+  const response = await projectService.fetchProjects(activePage.value, 112);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
-  loading.value = false;
+  setTimeout(() => (loading.value = false), 1000);
 }
 </script>
 
@@ -44,14 +46,37 @@ async function fetchProjects() {
   <main>
     <h1>Educatie</h1>
     <AppLoader v-if="loading"></AppLoader>
-    <ul v-if="!loading" class="blogpost-list">
-      <li class="blogpost-item" v-for="project in projects" :key="project.id">
-        <p>{{ project['project-categories'] }}</p>
-        <p>{{ project.excerpt.rendered }}</p>
-        <!-- <BlogPostSummary :post="post" /> -->
+    <ul v-if="!loading" class="project-list">
+      <li class="project-item" v-for="project in projects" :key="project.id">
+        <ProjectSummary :project="project" />
       </li>
     </ul>
-    <AppPagination :route-name="'education'" :active-page="activePage" :page-count="totalPages">
+    <AppPagination
+      v-if="activePage && totalPages"
+      :route-name="'education'"
+      :active-page="activePage"
+      :page-count="totalPages"
+    >
     </AppPagination>
   </main>
 </template>
+
+<style scoped lang="scss">
+.project-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 40px;
+
+  @media screen and (min-width: 740px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-item {
+    list-style: none;
+    border-radius: 5px;
+    border: 1pt solid lightgray;
+    box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
+    padding: 15px;
+  }
+}
+</style>

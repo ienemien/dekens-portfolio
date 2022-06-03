@@ -1,7 +1,8 @@
+Media
 <script setup lang="ts">
 import AppBackButton from "@/components/AppBackButton.vue";
 import type BlogPost from "@/model/BlogPost";
-import type PostMedia from "@/model/PostMedia";
+import type Media from "@/model/Media";
 import BlogPostService from "@/services/BlogPostService";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
@@ -11,7 +12,7 @@ import { useRoute } from "vue-router";
 
 const postService = new BlogPostService();
 const post = ref<BlogPost>();
-const media = ref<PostMedia[]>([]);
+const media = ref<Media[]>([]);
 const lightboxVisible = ref<boolean>(false);
 const lightboxIndex = ref<number>(0);
 const route = useRoute();

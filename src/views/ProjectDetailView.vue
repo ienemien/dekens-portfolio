@@ -1,5 +1,6 @@
+Media
 <script setup lang="ts">
-import type PostMedia from "@/model/PostMedia";
+import type Media from "@/model/Media";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
 import AppBackButton from "@/components/AppBackButton.vue";
@@ -11,7 +12,7 @@ import { useRoute } from "vue-router";
 
 const projectService = new ProjectService();
 const post = ref<Project>();
-const media = ref<PostMedia[]>([]);
+const media = ref<Media[]>([]);
 const lightboxVisible = ref<boolean>(false);
 const lightboxIndex = ref<number>(0);
 const route = useRoute();

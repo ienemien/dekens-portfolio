@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import AppPagination from "@/components/AppPagination.vue";
 import AppLoader from "@/components/AppLoader.vue";
+import AppPagination from "@/components/AppPagination.vue";
 import ProjectSummary from "@/components/ProjectSummary.vue";
-import { ref } from "@vue/reactivity";
+import PageDetails from "@/components/PageDetails.vue";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
-import { watch, onMounted } from "vue";
+import { ref } from "@vue/reactivity";
+import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const projectService = new ProjectService();
@@ -47,6 +48,7 @@ async function fetchProjects() {
 
 <template>
   <h1>Werk</h1>
+  <PageDetails slug="werk"></PageDetails>
   <AppLoader v-if="loading"></AppLoader>
   <ul v-if="!loading" class="project-list">
     <li class="project-item" v-for="project in projects" :key="project.id">

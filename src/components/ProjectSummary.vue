@@ -1,11 +1,12 @@
+Media
 <script setup lang="ts">
 import type Project from "@/model/Project";
 import { RouterLink } from "vue-router";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
-import type PostMedia from "@/model/PostMedia";
+import type Media from "@/model/Media";
 
-const media = ref<PostMedia>();
+const media = ref<Media>();
 const props = defineProps<{
   project?: Project;
 }>();

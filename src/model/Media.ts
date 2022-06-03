@@ -25,7 +25,7 @@ interface MediaDetails {
   image_meta: unknown;
 }
 
-export default interface PostMedia {
+export default interface Media {
   date?: string;
   date_gmt?: string;
   guid: WordpressText;

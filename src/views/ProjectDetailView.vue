@@ -87,6 +87,14 @@ function hideLightbox() {
       </VueEasyLightbox>
     </div>
     <div class="content" v-html="post?.content.rendered"></div>
+    <ul>
+      <li
+        v-for="(category, index) in post?.['project-categories']"
+        :key="index"
+      >
+        {{ category }}
+      </li>
+    </ul>
     <AppBackButton></AppBackButton>
   </article>
 </template>

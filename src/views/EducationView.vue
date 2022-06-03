@@ -34,7 +34,6 @@ onMounted(async () => {
 
 async function fetchProjects() {
   loading.value = true;
-  //todo: only load education projects
   const response = await projectService.fetchProjects(activePage.value, [112]);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;

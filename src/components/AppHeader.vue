@@ -184,7 +184,7 @@ header {
         }
 
         a {
-          font-size: large;
+          font-size: medium;
           text-decoration: none;
           color: black;
 

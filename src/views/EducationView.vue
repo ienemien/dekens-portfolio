@@ -35,7 +35,7 @@ onMounted(async () => {
 async function fetchProjects() {
   loading.value = true;
   //todo: only load education projects
-  const response = await projectService.fetchProjects(activePage.value, 112);
+  const response = await projectService.fetchProjects(activePage.value, [112]);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
   setTimeout(() => (loading.value = false), 1000);
@@ -43,22 +43,20 @@ async function fetchProjects() {
 </script>
 
 <template>
-  <main>
-    <h1>Educatie</h1>
-    <AppLoader v-if="loading"></AppLoader>
-    <ul v-if="!loading" class="project-list">
-      <li class="project-item" v-for="project in projects" :key="project.id">
-        <ProjectSummary :project="project" />
-      </li>
-    </ul>
-    <AppPagination
-      v-if="activePage && totalPages"
-      :route-name="'education'"
-      :active-page="activePage"
-      :page-count="totalPages"
-    >
-    </AppPagination>
-  </main>
+  <h1>Educatie</h1>
+  <AppLoader v-if="loading"></AppLoader>
+  <ul v-if="!loading" class="project-list">
+    <li class="project-item" v-for="project in projects" :key="project.id">
+      <ProjectSummary :project="project" />
+    </li>
+  </ul>
+  <AppPagination
+    v-if="activePage && totalPages"
+    :route-name="'education'"
+    :active-page="activePage"
+    :page-count="totalPages"
+  >
+  </AppPagination>
 </template>
 
 <style scoped lang="scss">

@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import nl from "dayjs/locale/nl";
 
 import "./assets/normalize.css";
-import "./assets/base.css";
+import "./assets/base.scss";
 
 dayjs.locale(nl);
 

@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import AppBackButton from "@/components/AppBackButton.vue";
 import type BlogPost from "@/model/BlogPost";
 import type PostMedia from "@/model/PostMedia";
 import BlogPostService from "@/services/BlogPostService";
-import { useBlogPostStore } from "@/stores/BlogPostStore";
-import AppBackButton from "@/components/AppBackButton.vue";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
 import VueEasyLightbox from "vue-easy-lightbox";
+import { useRoute } from "vue-router";
 
 const postService = new BlogPostService();
 const post = ref<BlogPost>();
@@ -16,8 +15,6 @@ const media = ref<PostMedia[]>([]);
 const lightboxVisible = ref<boolean>(false);
 const lightboxIndex = ref<number>(0);
 const route = useRoute();
-const router = useRouter();
-const postStore = useBlogPostStore();
 
 const postDate = computed(() =>
   dayjs(post?.value?.date).format("DD MMMM YYYY")

@@ -67,13 +67,23 @@ function hideLightbox() {
     </header>
     <div class="gallery" v-if="media && media.length > 0">
       <template v-for="(image, index) in media" :key="index">
-        <img v-if="image.media_type === 'image'" :src="
-          image.media_details.sizes.medium?.source_url ??
-          image.source_url
-        " @click="showLightbox(index)" />
+        <img
+          v-if="image.media_type === 'image'"
+          :src="
+            image.media_details.sizes.medium?.source_url ?? image.source_url
+          "
+          @click="showLightbox(index)"
+        />
       </template>
-      <VueEasyLightbox scrollDisabled escDisabled moveDisabled :index="lightboxIndex" :visible="lightboxVisible"
-        :imgs="lightboxImgs" @hide="hideLightbox">
+      <VueEasyLightbox
+        scrollDisabled
+        escDisabled
+        moveDisabled
+        :index="lightboxIndex"
+        :visible="lightboxVisible"
+        :imgs="lightboxImgs"
+        @hide="hideLightbox"
+      >
       </VueEasyLightbox>
     </div>
     <div class="content" v-html="post?.content.rendered"></div>

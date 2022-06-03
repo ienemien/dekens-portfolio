@@ -7,7 +7,18 @@ export default class ProjectService {
 
   public async fetchProjects(
     page: number,
-    category?: number
+    categories?: number[],
+    orderBy?:
+      | "author"
+      | "date"
+      | "id"
+      | "include"
+      | "modified"
+      | "parent"
+      | "relevance"
+      | "slug"
+      | "include_slugs"
+      | "title"
   ): Promise<PostResponse | undefined> {
     const projectsResponse: PostResponse = {
       totalPages: 0,
@@ -15,8 +26,11 @@ export default class ProjectService {
       posts: [],
     };
     let url = `${ProjectService.PROJECTS_URL}?page=${page}&per_page=${ProjectService.DEFAULT_PROJECTS_PER_PAGE}`;
-    if (category) {
-      url = `${url}&project-categories=${category}`;
+    if (categories && categories.length > 0) {
+      url = `${url}&project-categories=${categories}`;
+    }
+    if (orderBy) {
+      url = `${url}&orderby=${orderBy}`;
     }
     const response: Response = await fetch(url);
 

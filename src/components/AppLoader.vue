@@ -10,6 +10,11 @@
 @keyframes rotate-fly {
   from {
     transform: rotate(0deg) translate(-300px);
+    opacity: 0;
+  }
+
+  2% {
+    opacity: 1;
   }
 
   25% {
@@ -24,8 +29,13 @@
     transform: rotate(-360deg);
   }
 
+  98% {
+    opacity: 1;
+  }
+
   to {
     transform: rotate(-360deg) translate(300px);
+    opacity: 0;
   }
 }
 

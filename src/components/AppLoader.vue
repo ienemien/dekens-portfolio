@@ -1,5 +1,4 @@
 <template>
-  <h3>We halen de berichten vliegensvlug voor je op</h3>
   <div class="loader">
     <div class="fly-cage">
       <img src="../assets/loader-fly.png" class="loader-fly" />

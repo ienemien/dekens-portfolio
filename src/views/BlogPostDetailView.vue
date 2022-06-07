@@ -92,34 +92,6 @@ function hideLightbox() {
 </template>
 
 <style lang="scss" scoped>
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-
-  img {
-    max-height: 100px;
-    width: auto;
-    overflow: hidden;
-    margin: 2px;
-    cursor: pointer;
-  }
-}
-
-.content {
-  &:deep(.wp-block-image) {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-
-    img {
-      width: 50vw;
-      height: auto;
-    }
-  }
-}
+@import "../assets/content.scss";
+@import "../assets/gallery.scss";
 </style>

@@ -25,16 +25,18 @@ onMounted(async () => {
 <template>
   <article>
     <header>
-      <img
-        v-if="media"
-        :src="media.media_details.sizes['project-archive'].source_url"
-      />
+      <RouterLink :to="{ name: 'project', params: { id: project?.id } }">
+        <img
+          v-if="media"
+          :src="media.media_details.sizes['project-archive'].source_url"
+        />
+      </RouterLink>
       <time :datetime="postDateTime">{{ postDate }}</time>
       <h2 v-html="project?.title.rendered"></h2>
     </header>
     <p v-html="project?.excerpt.rendered"></p>
     <RouterLink :to="{ name: 'project', params: { id: project?.id } }"
-      >Lees verder</RouterLink
+      >&#10095; Lees verder</RouterLink
     >
   </article>
 </template>
@@ -50,6 +52,16 @@ header {
 
   img {
     max-width: 300px;
+  }
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+
+  &:visited {
+    color: black;
   }
 }
 </style>

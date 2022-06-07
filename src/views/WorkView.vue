@@ -57,7 +57,7 @@ async function fetchProjects() {
   </ul>
   <AppPagination
     v-if="activePage && totalPages"
-    :route-name="'education'"
+    :route-name="'work'"
     :active-page="activePage"
     :page-count="totalPages"
   >

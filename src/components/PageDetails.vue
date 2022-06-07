@@ -15,7 +15,7 @@ const page = ref<Page>();
 onMounted(async () => {
   const pages = await pageService.fetchPageBySlug(props.slug ?? "");
   page.value = pages[0];
-  const mediaUrl = page.value._links["wp:featuredmedia"][0].href;
+  const mediaUrl = page.value._links["wp:featuredmedia"]?.[0].href;
   if (mediaUrl) {
     media.value = await (await fetch(mediaUrl)).json();
   }

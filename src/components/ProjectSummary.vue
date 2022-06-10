@@ -1,19 +1,24 @@
 Media
 <script setup lang="ts">
-import type Media from "@/model/Media";
 import type Project from "@/model/Project";
 import { onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 
-const media = ref<Media>();
+const imgUrl = ref<string>();
 const props = defineProps<{
   project?: Project;
 }>();
 
 onMounted(async () => {
-  const mediaUrl = props.project?._links["wp:featuredmedia"][0].href;
+  const mediaUrl = props.project?._links["wp:attachment"]?.[0].href;
   if (mediaUrl) {
-    media.value = await (await fetch(mediaUrl)).json();
+    const media = await (await fetch(mediaUrl)).json();
+    const img = new Image();
+    img.onload = function () {
+      imgUrl.value =
+        media[0].media_details.sizes["project-archive"]?.source_url;
+    };
+    img.src = media[0].media_details.sizes["project-archive"]?.source_url;
   }
 });
 </script>
@@ -21,10 +26,9 @@ onMounted(async () => {
 <template>
   <article>
     <RouterLink :to="{ name: 'project', params: { id: project?.id } }">
-      <img
-        v-if="media"
-        :src="media.media_details.sizes['project-archive'].source_url"
-      />
+      <Transition>
+        <img v-if="imgUrl" :src="imgUrl" />
+      </Transition>
       <h2 v-html="project?.title.rendered"></h2>
     </RouterLink>
     <p v-html="project?.excerpt.rendered"></p>
@@ -49,5 +53,15 @@ article {
       max-width: 300px;
     }
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

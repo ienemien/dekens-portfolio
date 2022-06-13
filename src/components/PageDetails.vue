@@ -42,14 +42,14 @@ article {
 
   img {
     width: auto;
-    height: 70vh;
+    height: 60vh;
   }
 }
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 1s;
-  transition-delay: 1s;
+  transition: opacity 0.8s;
+  transition-delay: 0.5s;
 }
 
 .v-enter-from,

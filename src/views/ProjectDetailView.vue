@@ -93,6 +93,6 @@ function hideLightbox() {
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/content.scss";
-@import "../assets/gallery.scss";
+@import "../assets/css/_content.scss";
+@import "../assets/css/_gallery.scss";
 </style>

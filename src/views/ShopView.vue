@@ -49,11 +49,11 @@ async function fetchProjects() {
 <template>
   <h1>Winkel</h1>
   <AppLoader v-if="loading"></AppLoader>
-  <ul v-if="!loading" class="project-list">
+  <TransitionGroup name="list" tag="ul" class="project-list">
     <li class="project-item" v-for="project in projects" :key="project.id">
       <ProjectSummary :project="project" />
     </li>
-  </ul>
+  </TransitionGroup>
   <AppPagination
     v-if="activePage && totalPages"
     :route-name="'shop'"
@@ -64,6 +64,7 @@ async function fetchProjects() {
 </template>
 
 <style scoped lang="scss">
+@import "../assets/css/_load-posts.scss";
 .project-list {
   display: grid;
   grid-template-columns: 1fr;

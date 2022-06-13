@@ -1,7 +1,7 @@
 <template>
   <div class="loader">
     <div class="fly-cage">
-      <img src="../assets/loader-fly.png" class="loader-fly" />
+      <img src="../assets/images/loader-fly.png" class="loader-fly" />
     </div>
   </div>
 </template>
@@ -27,15 +27,14 @@
 
   75% {
     transform: rotate(-360deg);
-  }
-
-  98% {
+    height: 200px;
     opacity: 1;
   }
 
   to {
     transform: rotate(-360deg) translate(300px);
     opacity: 0;
+    height: 0;
   }
 }
 
@@ -50,6 +49,7 @@
     animation: rotate-fly 1s linear;
     animation-fill-mode: forwards;
     transform-origin: center center;
+    overflow: hidden;
 
     .loader-fly {
       position: relative;

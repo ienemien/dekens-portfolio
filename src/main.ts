@@ -6,8 +6,8 @@ import router from "./router";
 import dayjs from "dayjs";
 import nl from "dayjs/locale/nl";
 
-import "./assets/normalize.css";
-import "./assets/base.scss";
+import "./assets/css/normalize.css";
+import "./assets/css/base.scss";
 
 dayjs.locale(nl);
 

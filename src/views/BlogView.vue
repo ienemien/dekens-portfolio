@@ -31,7 +31,7 @@ onMounted(async () => {
 <template>
   <h1>Blog</h1>
   <AppLoader v-if="blogPostStore.loading"></AppLoader>
-  <ul v-if="!blogPostStore.loading" class="blogpost-list">
+  <TransitionGroup name="list" tag="ul" class="blogpost-list">
     <li
       class="blogpost-item"
       v-for="post in blogPostStore.activePosts"
@@ -39,7 +39,7 @@ onMounted(async () => {
     >
       <BlogPostSummary :post="post" />
     </li>
-  </ul>
+  </TransitionGroup>
   <AppPagination
     :route-name="'blog'"
     :active-page="activePage"
@@ -49,6 +49,7 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
+@import "../assets/css/_load-posts.scss";
 .blogpost-list {
   display: grid;
   grid-template-columns: 1fr;

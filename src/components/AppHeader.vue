@@ -26,7 +26,7 @@ onUnmounted(() => {
 
 <template>
   <header>
-    <h1 class="title">Jojanneke Dekens</h1>
+    <RouterLink to="/" class="title"><h1>Jojanneke Dekens</h1></RouterLink>
     <button
       class="burger-menu"
       :class="{
@@ -84,9 +84,15 @@ header {
   z-index: 5;
 
   .title {
-    font-size: larger;
-    margin: 0;
     grid-column: 2 / span 2;
+    text-decoration: none;
+
+    h1 {
+      font-size: larger;
+      margin: 0;
+      text-decoration: none;
+      color: black;
+    }
   }
 
   .burger-menu {

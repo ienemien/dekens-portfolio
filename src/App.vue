@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
+import AppAlertComponent from "./components/AppAlertComponent.vue";
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import AppFooter from "./components/AppFooter.vue";
     <AppHeader></AppHeader>
 
     <main>
+      <AppAlertComponent></AppAlertComponent>
       <RouterView />
     </main>
 
@@ -23,7 +25,7 @@ import AppFooter from "./components/AppFooter.vue";
   grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
 
   main {
-    padding: 100px 10px 10px 10px;
+    padding: 120px 10px 10px 10px;
     grid-column: 1 / span 8;
 
     @media screen and (min-width: 740px) {

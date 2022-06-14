@@ -1,9 +1,13 @@
+import type Alert from "@/model/Alert";
 import type BlogPost from "@/model/BlogPost";
 import type PostResponse from "@/model/PostResponse";
+import { useAlertStore } from "@/stores/AlertStore";
+import axios, { type AxiosResponse } from "axios";
 
 export default class BlogPostService {
   private static POSTS_URL = "/api/posts";
   private static DEFAULT_POSTS_PER_PAGE = 10;
+  private alertStore = useAlertStore();
 
   public async fetchPosts(
     page: number,
@@ -15,25 +19,28 @@ export default class BlogPostService {
       posts: [],
     };
     const postsPerPage = perPage ?? BlogPostService.DEFAULT_POSTS_PER_PAGE;
-    const response: Response = await fetch(
-      `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}`
-    );
 
-    if (response.status === 200) {
-      blogPostResponse.posts = await response.json();
+    try {
+      const response: AxiosResponse = await axios.get(
+        `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}`,
+        { timeout: 3000 }
+      );
+      blogPostResponse.posts = response.data;
       blogPostResponse.totalPages = parseInt(
-        response.headers.get("x-wp-totalpages") ?? "0"
+        response.headers["x-wp-totalpages"] ?? "0"
       );
-      blogPostResponse.total = parseInt(
-        response.headers.get("x-wp-total") ?? "0"
-      );
+      blogPostResponse.total = parseInt(response.headers["x-wp-total"] ?? "0");
       return blogPostResponse;
-    } else {
-      throw "Could not fetch posts.";
+    } catch (err) {
+      const alert = {
+        type: "error",
+        message: `Could not fetch posts for page ${page}`,
+      } as Alert;
+      this.alertStore.addAlert(alert);
     }
   }
 
-  public async fetchPost(postId: string): Promise<BlogPost> {
+  public async fetchPost(postId: string): Promise<BlogPost | undefined> {
     const URL = `${BlogPostService.POSTS_URL}/${postId}`;
     const response = await fetch(URL);
 
@@ -41,6 +48,12 @@ export default class BlogPostService {
       return response.json();
     }
 
-    throw "Could not fetch post by id: " + postId;
+    const alert = {
+      type: "error",
+      message: `Could not fetch post by id ${postId}`,
+    } as Alert;
+    this.alertStore.addAlert(alert);
+
+    return;
   }
 }

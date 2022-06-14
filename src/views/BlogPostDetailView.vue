@@ -31,15 +31,11 @@ const lightboxImgs = computed(() =>
 );
 
 onMounted(async () => {
-  try {
-    const routeParamId = route.params["id"];
-    post.value = await postService.fetchPost(
-      Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
-    );
-    await fetchMedia();
-  } catch (err) {
-    alert(err); // TODO: proper error handling
-  }
+  const routeParamId = route.params["id"];
+  post.value = await postService.fetchPost(
+    Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
+  );
+  await fetchMedia();
 });
 
 async function fetchMedia() {

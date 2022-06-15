@@ -12,6 +12,7 @@ const alertStore = useAlertStore();
       :class="alert.type"
     >
       {{ alert.message }}
+      <button @click="alertStore.closeAlert(alert)">X</button>
     </li>
   </ul>
 </template>

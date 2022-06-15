@@ -23,5 +23,8 @@ export const useAlertStore = defineStore({
         this.alerts.push(newAlert);
       }
     },
+    closeAlert(closedAlert: Alert) {
+      this.alerts = this.alerts.filter((alert) => alert !== closedAlert);
+    },
   },
 });

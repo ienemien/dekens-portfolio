@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type Page from "@/model/Page";
 import PageService from "@/services/PageService";
+import axios from "axios";
 import { onMounted, ref } from "vue";
 
 const pageService = new PageService();
@@ -12,11 +13,10 @@ const props = defineProps<{
 const page = ref<Page>();
 
 onMounted(async () => {
-  const pages = await pageService.fetchPageBySlug(props.slug ?? "");
-  page.value = pages[0];
-  const mediaUrl = page.value._links["wp:featuredmedia"]?.[0].href;
+  page.value = await pageService.fetchPageBySlug(props.slug ?? "");
+  const mediaUrl = page.value?._links["wp:featuredmedia"]?.[0].href;
   if (mediaUrl) {
-    const media = await (await fetch(mediaUrl)).json();
+    const media = (await axios.get(mediaUrl)).data;
     const img = new Image();
     img.onload = function () {
       imgUrl.value = media?.source_url;

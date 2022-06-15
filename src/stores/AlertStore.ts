@@ -8,9 +8,13 @@ export const useAlertStore = defineStore({
     alerts: [] as Alert[],
   }),
   actions: {
-    addAlert(alert: Alert) {
-      alert.created = alert.created ?? dayjs();
+    addAlert(message: string, type = "error", created?: dayjs.Dayjs) {
+      const alert = {
+        type,
+        message,
+        created: created ?? dayjs(),
+      } as Alert;
       this.alerts.push(alert);
-    }
-  }
+    },
+  },
 });

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type Post from "@/model/BlogPost";
+import axios from "axios";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
@@ -15,7 +16,7 @@ const postDateTime = dayjs(props.post?.date).format("YYYY-MM-DD");
 onMounted(async () => {
   const mediaUrl = props.post?._links["wp:attachment"]?.[0].href;
   if (mediaUrl) {
-    const media = await (await fetch(mediaUrl)).json();
+    const media = await (await axios.get(mediaUrl)).data;
     const img = new Image();
     img.onload = function () {
       imgUrl.value =

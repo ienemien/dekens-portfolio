@@ -5,6 +5,7 @@ import type BlogPost from "@/model/BlogPost";
 import type Media from "@/model/Media";
 import BlogPostService from "@/services/BlogPostService";
 import { computed } from "@vue/reactivity";
+import axios from "axios";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import VueEasyLightbox from "vue-easy-lightbox";
@@ -41,7 +42,7 @@ onMounted(async () => {
 async function fetchMedia() {
   const mediaUrl = post.value?._links["wp:attachment"]?.[0].href;
   if (mediaUrl) {
-    media.value = await (await fetch(mediaUrl)).json();
+    media.value = (await axios.get(mediaUrl)).data;
   }
 }
 

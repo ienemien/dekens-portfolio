@@ -5,6 +5,7 @@ import { useAlertStore } from "@/stores/AlertStore";
 import axios, { type AxiosResponse } from "axios";
 
 export default class BlogPostService {
+  private static AXIOS_CONFIG = { timeout: 3000 };
   private static POSTS_URL = "/api/posts";
   private static DEFAULT_POSTS_PER_PAGE = 10;
   private alertStore = useAlertStore();
@@ -23,7 +24,7 @@ export default class BlogPostService {
     try {
       const response: AxiosResponse = await axios.get(
         `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}`,
-        { timeout: 3000 }
+        BlogPostService.AXIOS_CONFIG
       );
       blogPostResponse.posts = response.data;
       blogPostResponse.totalPages = parseInt(
@@ -32,28 +33,25 @@ export default class BlogPostService {
       blogPostResponse.total = parseInt(response.headers["x-wp-total"] ?? "0");
       return blogPostResponse;
     } catch (err) {
-      const alert = {
-        type: "error",
-        message: `Could not fetch posts for page ${page}`,
-      } as Alert;
-      this.alertStore.addAlert(alert);
+      this.alertStore.addAlert(
+        "Helaas lukt het op dit moment niet om de berichten op te halen, probeer het later nog eens."
+      );
     }
   }
 
   public async fetchPost(postId: string): Promise<BlogPost | undefined> {
     const URL = `${BlogPostService.POSTS_URL}/${postId}`;
-    const response = await fetch(URL);
 
-    if (response.status === 200) {
-      return response.json();
+    try {
+      const response: AxiosResponse = await axios.get(
+        URL,
+        BlogPostService.AXIOS_CONFIG
+      );
+      return response.data;
+    } catch (err) {
+      this.alertStore.addAlert(
+        "Helaas lukt het op dit moment niet om het bericht op te halen, probeer het later nog eens."
+      );
     }
-
-    const alert = {
-      type: "error",
-      message: `Could not fetch post by id ${postId}`,
-    } as Alert;
-    this.alertStore.addAlert(alert);
-
-    return;
   }
 }

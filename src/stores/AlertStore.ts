@@ -9,12 +9,19 @@ export const useAlertStore = defineStore({
   }),
   actions: {
     addAlert(message: string, type = "error", created?: dayjs.Dayjs) {
-      const alert = {
+      const newAlert = {
         type,
         message,
         created: created ?? dayjs(),
       } as Alert;
-      this.alerts.push(alert);
+
+      const alertAlreadyExists = !!this.alerts.find(
+        (alert: Alert) => alert.message === newAlert.message
+      );
+
+      if (!alertAlreadyExists) {
+        this.alerts.push(newAlert);
+      }
     },
   },
 });

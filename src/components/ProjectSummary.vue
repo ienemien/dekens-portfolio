@@ -19,7 +19,7 @@ onMounted(async () => {
       imgUrl.value =
         media[0].media_details.sizes["project-archive"]?.source_url;
     };
-    img.src = media[0].media_details.sizes["project-archive"]?.source_url;
+    img.src = media[0]?.media_details.sizes["project-archive"]?.source_url;
   }
 });
 </script>

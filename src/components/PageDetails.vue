@@ -48,7 +48,7 @@ article {
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.8s;
+  transition: opacity 0.5s;
   transition-delay: 0.5s;
 }
 

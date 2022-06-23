@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type Page from "@/model/Page";
+import MediaService from "@/services/MediaService";
 import PageService from "@/services/PageService";
-import axios from "axios";
 import { onMounted, ref } from "vue";
 
 const pageService = new PageService();
+const mediaService = new MediaService();
 const imgUrl = ref<string>();
 const props = defineProps<{
   slug?: string;
@@ -14,15 +15,7 @@ const page = ref<Page>();
 
 onMounted(async () => {
   page.value = await pageService.fetchPageBySlug(props.slug ?? "");
-  const mediaUrl = page.value?._links["wp:featuredmedia"]?.[0].href;
-  if (mediaUrl) {
-    const media = (await axios.get(mediaUrl)).data;
-    const img = new Image();
-    img.onload = function () {
-      imgUrl.value = media?.source_url;
-    };
-    img.src = media?.source_url;
-  }
+  imgUrl.value = await mediaService.getFeaturedMedia(page.value);
 });
 </script>
 

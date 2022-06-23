@@ -1,6 +1,7 @@
 Media
 <script setup lang="ts">
 import type Project from "@/model/Project";
+import axios from "axios";
 import { onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 
@@ -12,13 +13,13 @@ const props = defineProps<{
 onMounted(async () => {
   const mediaUrl = props.project?._links["wp:attachment"]?.[0].href;
   if (mediaUrl) {
-    const media = await (await fetch(mediaUrl)).json();
+    const media = (await axios.get(mediaUrl)).data;
     const img = new Image();
     img.onload = function () {
       imgUrl.value =
         media[0].media_details.sizes["project-archive"]?.source_url;
     };
-    img.src = media[0].media_details.sizes["project-archive"]?.source_url;
+    img.src = media[0]?.media_details.sizes["project-archive"]?.source_url;
   }
 });
 </script>

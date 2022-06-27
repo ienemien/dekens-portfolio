@@ -12,7 +12,7 @@ const props = defineProps<{
 }>();
 
 onMounted(async () => {
-  imgUrl.value = await mediaService.getProjectArchive(props.project);
+  imgUrl.value = await mediaService.getProjectArchiveUrl(props.project);
 });
 </script>
 

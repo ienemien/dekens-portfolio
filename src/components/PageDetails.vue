@@ -15,7 +15,7 @@ const page = ref<Page>();
 
 onMounted(async () => {
   page.value = await pageService.fetchPageBySlug(props.slug ?? "");
-  imgUrl.value = await mediaService.getFeaturedMedia(page.value);
+  imgUrl.value = await mediaService.getFeaturedMediaUrl(page.value);
 });
 </script>
 

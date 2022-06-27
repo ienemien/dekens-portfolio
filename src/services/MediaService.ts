@@ -1,4 +1,5 @@
 import type BlogPost from "@/model/BlogPost";
+import type Media from "@/model/Media";
 import type Page from "@/model/Page";
 import type Project from "@/model/Project";
 import axios from "axios";
@@ -6,7 +7,17 @@ import axios from "axios";
 export default class MediaService {
   private static AXIOS_CONFIG = { timeout: 3000 };
 
-  public async getThumbnail(
+  public async getMedia(
+    item: BlogPost | Project | undefined
+  ): Promise<Media[]> {
+    const mediaUrl = item?._links["wp:attachment"]?.[0].href;
+    if (mediaUrl) {
+      return (await axios.get(mediaUrl)).data as Media[];
+    }
+    return [];
+  }
+
+  public async getThumbnailUrl(
     item: BlogPost | undefined
   ): Promise<string | undefined> {
     const mediaUrl = item?._links["wp:attachment"]?.[0].href;
@@ -18,7 +29,7 @@ export default class MediaService {
     }
   }
 
-  public async getProjectArchive(
+  public async getProjectArchiveUrl(
     item: Project | undefined
   ): Promise<string | undefined> {
     const mediaUrl = item?._links["wp:attachment"]?.[0].href;
@@ -30,7 +41,7 @@ export default class MediaService {
     }
   }
 
-  public async getFeaturedMedia(
+  public async getFeaturedMediaUrl(
     item: Page | undefined
   ): Promise<string | undefined> {
     const mediaUrl = item?._links["wp:featuredmedia"]?.[0].href;

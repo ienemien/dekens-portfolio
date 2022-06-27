@@ -4,14 +4,15 @@ import AppBackButton from "@/components/AppBackButton.vue";
 import type BlogPost from "@/model/BlogPost";
 import type Media from "@/model/Media";
 import BlogPostService from "@/services/BlogPostService";
+import MediaService from "@/services/MediaService";
 import { computed } from "@vue/reactivity";
-import axios from "axios";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
 import VueEasyLightbox from "vue-easy-lightbox";
 import { useRoute } from "vue-router";
 
 const postService = new BlogPostService();
+const mediaService = new MediaService();
 const post = ref<BlogPost>();
 const media = ref<Media[]>([]);
 const lightboxVisible = ref<boolean>(false);
@@ -21,6 +22,7 @@ const route = useRoute();
 const postDate = computed(() =>
   dayjs(post?.value?.date).format("DD MMMM YYYY")
 );
+
 const postDateTime = computed(() =>
   dayjs(post?.value?.date).format("YYYY-MM-DD")
 );
@@ -36,15 +38,8 @@ onMounted(async () => {
   post.value = await postService.fetchPost(
     Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
   );
-  await fetchMedia();
+  media.value = await mediaService.getMedia(post.value);
 });
-
-async function fetchMedia() {
-  const mediaUrl = post.value?._links["wp:attachment"]?.[0].href;
-  if (mediaUrl) {
-    media.value = (await axios.get(mediaUrl)).data;
-  }
-}
 
 function showLightbox(index?: number) {
   lightboxVisible.value = true;

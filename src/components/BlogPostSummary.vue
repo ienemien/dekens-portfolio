@@ -15,7 +15,7 @@ const postDate = dayjs(props.post?.date).format("DD MMMM YYYY");
 const postDateTime = dayjs(props.post?.date).format("YYYY-MM-DD");
 
 onMounted(async () => {
-  imgUrl.value = await mediaService.getThumbnail(props.post);
+  imgUrl.value = await mediaService.getThumbnailUrl(props.post);
 });
 </script>
 

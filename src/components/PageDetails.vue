@@ -30,12 +30,13 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 article {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 
   img {
-    width: auto;
-    height: 60vh;
+    width: 100%;
+    height: auto;
   }
 }
 

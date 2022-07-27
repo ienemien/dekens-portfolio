@@ -5,7 +5,7 @@ import type Project from "@/model/Project";
 import axios from "axios";
 
 export default class MediaService {
-  private static AXIOS_CONFIG = { timeout: 3000 };
+  private static AXIOS_CONFIG = { timeout: 5000 };
 
   public async getMedia(
     item: BlogPost | Project | undefined

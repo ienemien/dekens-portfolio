@@ -30,33 +30,53 @@ onMounted(async () => {
     </header>
     <p v-html="post?.excerpt.rendered"></p>
     <RouterLink :to="{ name: 'post', params: { id: post?.id } }"
-      >Lees verder</RouterLink
+      >Lees verder &#10095;</RouterLink
     >
   </article>
 </template>
 
-<style scoped>
-header {
-  display: grid;
-  grid-template-columns: repeat(3 1fr);
-}
+<style scoped lang="scss">
+article {
+  padding: 5px;
 
-header h1 {
-  grid-column: 1 / span 1;
-}
+  header {
+    display: grid;
+    grid-template-columns: repeat(3 1fr);
 
-header img {
-  justify-self: right;
-  grid-column: 3 / span 1;
-}
+    h1 {
+      grid-column: 1 / span 1;
+    }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 1.5s ease;
-}
+    img {
+      margin: 3px;
+      justify-self: right;
+      grid-column: 3 / span 1;
+    }
+  }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+  a {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      color: black;
+    }
+
+    &:visited {
+      color: black;
+    }
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 1.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
 }
 </style>

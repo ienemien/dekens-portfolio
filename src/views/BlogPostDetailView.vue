@@ -39,6 +39,10 @@ onMounted(async () => {
     Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
   );
   media.value = await mediaService.getMedia(post.value);
+  const regex = /&#[0-9]{4};/g;
+  document.title =
+    post.value?.title.rendered.replace(regex, "") ??
+    (route.meta.title as string);
 });
 
 function showLightbox(index?: number) {

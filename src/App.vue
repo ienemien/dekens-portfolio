@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import AppHeader from "@/components/AppHeader.vue";
-import AppFooter from "./components/AppFooter.vue";
 import AppAlertComponent from "./components/AppAlertComponent.vue";
 </script>
 
@@ -13,8 +12,6 @@ import AppAlertComponent from "./components/AppAlertComponent.vue";
       <AppAlertComponent></AppAlertComponent>
       <RouterView />
     </main>
-
-    <AppFooter></AppFooter>
   </div>
 </template>
 

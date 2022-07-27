@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <div>
     <nav>
       <a
         href="http://nl.linkedin.com/pub/jojanneke-dekens/17/a4a/378"
@@ -14,11 +14,11 @@
         <img src="../assets/images/instagram.png" target="blank" />
       </a>
     </nav>
-  </footer>
+  </div>
 </template>
 
 <styles scoped lang="scss">
-footer {
+div {
   display: flex;
   justify-content: center;
   width: 100%;

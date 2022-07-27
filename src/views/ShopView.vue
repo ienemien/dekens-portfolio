@@ -47,7 +47,6 @@ async function fetchProjects() {
 </script>
 
 <template>
-  <h1>Winkel</h1>
   <AppLoader v-if="loading"></AppLoader>
   <TransitionGroup name="list" tag="ul" class="project-list">
     <li class="project-item" v-for="project in projects" :key="project.id">

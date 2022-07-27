@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import PageDetails from "@/components/PageDetails.vue";
+import AppSocialButtons from "@/components/AppSocialButtons.vue";
 </script>
 
 <template>
-  <h1>Contact</h1>
   <PageDetails slug="contact"></PageDetails>
+  <AppSocialButtons></AppSocialButtons>
 </template>

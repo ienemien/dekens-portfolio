@@ -47,7 +47,6 @@ async function fetchProjects() {
 </script>
 
 <template>
-  <h1>Werk</h1>
   <PageDetails slug="werk"></PageDetails>
   <AppLoader v-if="loading"></AppLoader>
   <TransitionGroup name="list" tag="ul" class="project-list">

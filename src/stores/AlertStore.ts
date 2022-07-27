@@ -1,5 +1,4 @@
 import type Alert from "@/model/Alert";
-import dayjs from "dayjs";
 import { defineStore } from "pinia";
 
 export const useAlertStore = defineStore({

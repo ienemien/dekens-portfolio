@@ -29,7 +29,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1>Blog</h1>
   <AppLoader v-if="blogPostStore.loading"></AppLoader>
   <TransitionGroup name="list" tag="ul" class="blogpost-list">
     <li

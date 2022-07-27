@@ -1,9 +1,26 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "@vue/runtime-dom";
-import { RouterLink } from "vue-router";
+import {
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  ref,
+  watch,
+} from "@vue/runtime-dom";
+import { RouterLink, useRoute } from "vue-router";
 
+const route = useRoute();
 const isWindowSizeLarge = () => window.innerWidth >= 992;
 const showMenu = ref(isWindowSizeLarge());
+const title = ref("");
+
+watch(
+  () => route.meta.title,
+  async (newTitle) => {
+    if (newTitle) {
+      title.value = newTitle as string;
+    }
+  }
+);
 
 function toggleShowMenu() {
   if (!isWindowSizeLarge()) {
@@ -19,6 +36,11 @@ onMounted(() => {
   window.addEventListener("resize", onWindowResize);
 });
 
+onUpdated(() => {
+  title.value = route.meta.title as string;
+  console.log(title.value);
+});
+
 onUnmounted(() => {
   window.removeEventListener("resize", onWindowResize);
 });
@@ -26,7 +48,11 @@ onUnmounted(() => {
 
 <template>
   <header>
-    <RouterLink to="/" class="title"><h1>Jojanneke Dekens</h1></RouterLink>
+    <RouterLink to="/" class="title"
+      ><h1>
+        Jojanneke Dekens<span v-if="title"> - {{ title }}</span>
+      </h1></RouterLink
+    >
     <button
       class="burger-menu"
       :class="{
@@ -78,10 +104,10 @@ header {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   align-items: center;
-  padding: 20px 0;
-  box-shadow: 0 3px 5px rgb(230, 230, 230);
+  padding: 10px 0;
   background-color: white;
   z-index: 5;
+  opacity: 0.9;
 
   .title {
     grid-column: 2 / span 2;

@@ -38,7 +38,6 @@ onMounted(() => {
 
 onUpdated(() => {
   title.value = route.meta.title as string;
-  console.log(title.value);
 });
 
 onUnmounted(() => {

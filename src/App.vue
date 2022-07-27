@@ -5,9 +5,8 @@ import AppAlertComponent from "./components/AppAlertComponent.vue";
 </script>
 
 <template>
+  <AppHeader></AppHeader>
   <div class="grid-container">
-    <AppHeader></AppHeader>
-
     <main>
       <AppAlertComponent></AppAlertComponent>
       <RouterView />
@@ -22,11 +21,12 @@ import AppAlertComponent from "./components/AppAlertComponent.vue";
   grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
 
   main {
-    padding: 120px 100px 10px 100px;
+    padding: 120px 10px 10px 10px;
     grid-column: 1 / span 8;
 
     @media screen and (min-width: 740px) {
       grid-column: 2 / span 6;
+      padding: 100px 100px 10px 100px;
     }
   }
 }

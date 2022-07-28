@@ -106,7 +106,7 @@ header {
   padding: 10px 0;
   background-color: white;
   z-index: 5;
-  opacity: 0.9;
+  opacity: 0.95;
 
   .title {
     grid-column: 2 / span 2;

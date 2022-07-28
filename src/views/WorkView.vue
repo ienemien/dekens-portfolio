@@ -49,10 +49,12 @@ async function fetchProjects() {
 <template>
   <PageDetails slug="werk"></PageDetails>
   <AppLoader v-if="loading"></AppLoader>
-  <TransitionGroup name="list" tag="ul" class="project-list">
-    <li class="project-item" v-for="project in projects" :key="project.id">
-      <ProjectSummary :project="project" />
-    </li>
+  <TransitionGroup name="list" tag="div" class="project-list">
+    <ProjectSummary
+      :project="project"
+      v-for="project in projects"
+      :key="project.id"
+    />
   </TransitionGroup>
   <AppPagination
     v-if="activePage && totalPages"
@@ -65,21 +67,5 @@ async function fetchProjects() {
 
 <style scoped lang="scss">
 @import "../assets/css/_load-posts.scss";
-.project-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 40px;
-
-  @media screen and (min-width: 740px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .project-item {
-    list-style: none;
-    border-radius: 5px;
-    border: 1pt solid lightgray;
-    box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
-    padding: 15px;
-  }
-}
+@import "../assets/css/_project-list.scss";
 </style>

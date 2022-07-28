@@ -32,11 +32,16 @@ onMounted(async () => {
 article {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 
   img {
-    width: 100%;
+    width: 70vw;
     height: auto;
+
+    @media screen and (min-width: 768px) {
+      width: auto;
+      height: 70vh;
+    }
   }
 }
 

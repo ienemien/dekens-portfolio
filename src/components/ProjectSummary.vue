@@ -20,30 +20,57 @@ onMounted(async () => {
   <article>
     <RouterLink :to="{ name: 'project', params: { id: project?.id } }">
       <Transition>
-        <img v-if="imgUrl" :src="imgUrl" />
+        <div>
+          <img v-if="imgUrl" :src="imgUrl" />
+
+          <div class="summary-info">
+            <h2 v-html="project?.title.rendered"></h2>
+          </div>
+        </div>
       </Transition>
-      <h2 v-html="project?.title.rendered"></h2>
     </RouterLink>
-    <p v-html="project?.excerpt.rendered"></p>
   </article>
 </template>
 
 <style lang="scss" scoped>
 article {
+  position: relative;
+  border-radius: 5px;
+  border: 1pt solid lightgray;
+  overflow: hidden;
+  font-size: small;
+  margin: 0 0 10px 0;
+  aspect-ratio: 1 / 1;
+  flex: 100%;
+
+  @media screen and (min-width: 768px) {
+    flex: 30%;
+    margin: 10px;
+  }
+
   a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     text-decoration: none;
     font-weight: bold;
     color: black;
+    cursor: pointer;
 
     &:visited {
       color: black;
     }
 
     img {
-      max-width: 300px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .summary-info {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 0 10px 0 10px;
+      background-color: white;
+      opacity: 0.9;
+      width: 100%;
     }
   }
 }

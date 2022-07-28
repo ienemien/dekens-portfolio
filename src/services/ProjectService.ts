@@ -7,7 +7,7 @@ export default class ProjectService {
   private static AXIOS_CONFIG = { timeout: 3000 };
   private alertStore = useAlertStore();
   private static PROJECTS_URL = "/api/projects";
-  private static DEFAULT_PROJECTS_PER_PAGE = 10;
+  private static DEFAULT_PROJECTS_PER_PAGE = 9;
 
   public async fetchProjects(
     page: number,

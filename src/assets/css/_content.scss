@@ -6,17 +6,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 20px 0;
     margin-block-start: 0;
     margin-block-end: 0;
     margin-inline-start: 0;
     margin-inline-end: 0;
     width: 100% important;
+    margin: 0 0 15px 0;
 
     img,
     video {
-      flex: 1;
-      max-width: 40vw;
+      max-width: 30vw;
       height: auto;
     }
 
@@ -32,12 +33,25 @@
   }
 
   &:deep(p) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0 15px 0;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+    }
+
     img {
-      display: block;
-      width: 40vw;
+      margin: 0 0 15px 0;
+      max-width: 90vw;
       height: auto;
-      margin-left: auto;
-      margin-right: auto;
+
+      @media screen and (min-width: 768px) {
+        margin: 0 0 15px 15px;
+        display: inline-block;
+        max-width: 30vw;
+      }
     }
   }
 }

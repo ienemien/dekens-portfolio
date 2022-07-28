@@ -5,7 +5,7 @@ import type Project from "@/model/Project";
 import axios from "axios";
 
 export default class MediaService {
-  private static AXIOS_CONFIG = { timeout: 5000 };
+  private static AXIOS_CONFIG = { timeout: 8000 };
 
   public async getMedia(
     item: BlogPost | Project | undefined
@@ -32,17 +32,17 @@ export default class MediaService {
   public async getProjectArchiveUrl(
     item: Project | undefined
   ): Promise<string | undefined> {
-    const mediaUrl = item?._links["wp:attachment"]?.[0].href;
+    const mediaUrl = item?._links["wp:featuredmedia"]?.[0].href;
     if (mediaUrl) {
       const media = await (
         await axios.get(mediaUrl, MediaService.AXIOS_CONFIG)
       ).data;
-      return media[0]?.media_details.sizes["project-archive"]?.source_url;
+      return media?.media_details.sizes["project-archive"]?.source_url;
     }
   }
 
   public async getFeaturedMediaUrl(
-    item: Page | undefined
+    item: Page | Project | undefined
   ): Promise<string | undefined> {
     const mediaUrl = item?._links["wp:featuredmedia"]?.[0].href;
     if (mediaUrl) {

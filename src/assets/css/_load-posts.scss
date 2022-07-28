@@ -1,8 +1,6 @@
-.list-enter-active,
-.list-leave-active {
+.projects-enter-active {
   transition: all 1s ease;
 }
-.list-enter-from,
-.list-leave-to {
+.projects-enter-from {
   opacity: 0;
 }

@@ -54,7 +54,7 @@ onMounted(async () => {
   grid-template-columns: 1fr;
   grid-gap: 40px;
 
-  @media screen and (min-width: 740px) {
+  @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
   }
 

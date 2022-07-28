@@ -21,7 +21,7 @@ defineProps<{
       >
         &#10094;
       </RouterLink>
-      <span>{{ activePage }}/{{ pageCount }}</span>
+      <div>{{ activePage }}/{{ pageCount }}</div>
       <RouterLink
         :to="{ name: routeName, query: { page: activePage + 1 } }"
         :class="{ disabled: activePage === pageCount }"
@@ -41,7 +41,7 @@ defineProps<{
 <style scoped lang="scss">
 div {
   display: flex;
-  margin: 15px 0;
+  margin: 20px 0;
   justify-content: center;
   grid-column: 1 / span 6;
 
@@ -74,12 +74,17 @@ div {
       }
     }
 
-    span {
+    div {
       display: none;
 
-      @media screen and (min-width: 740px) {
+      @media screen and (min-width: 768px) {
+        width: auto;
+        height: 30px;
         margin: 0 5px;
         display: inline-block;
+        line-height: 33px;
+        text-align: center;
+        vertical-align: middle;
       }
     }
   }

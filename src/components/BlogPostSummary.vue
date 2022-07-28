@@ -22,10 +22,10 @@ onMounted(async () => {
 <template>
   <article>
     <header>
-      <h2 v-html="post?.title.rendered"></h2>
       <Transition>
         <img v-if="imgUrl" :src="imgUrl" />
       </Transition>
+      <h2 v-html="post?.title.rendered"></h2>
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
     <p v-html="post?.excerpt.rendered"></p>
@@ -37,20 +37,26 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 article {
-  padding: 5px;
+  border-radius: 5px;
+  border: 1pt solid lightgray;
+  padding: 25px;
 
   header {
-    display: grid;
-    grid-template-columns: repeat(3 1fr);
+    h2 {
+      margin: 0;
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
 
-    h1 {
-      grid-column: 1 / span 1;
+    time {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: medium;
     }
 
     img {
-      margin: 3px;
-      justify-self: right;
-      grid-column: 3 / span 1;
+      margin: 0 0 5px 5px;
+      float: right;
     }
   }
 

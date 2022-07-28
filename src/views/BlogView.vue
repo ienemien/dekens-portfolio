@@ -30,14 +30,12 @@ onMounted(async () => {
 
 <template>
   <AppLoader v-if="blogPostStore.loading"></AppLoader>
-  <TransitionGroup name="list" tag="ul" class="blogpost-list">
-    <li
-      class="blogpost-item"
+  <TransitionGroup name="list" tag="div" class="blogpost-list">
+    <BlogPostSummary
+      :post="post"
       v-for="post in blogPostStore.activePosts"
       :key="post.id"
-    >
-      <BlogPostSummary :post="post" />
-    </li>
+    />
   </TransitionGroup>
   <AppPagination
     :route-name="'blog'"
@@ -52,7 +50,7 @@ onMounted(async () => {
 .blogpost-list {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 40px;
+  grid-gap: 2vh;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -60,10 +58,6 @@ onMounted(async () => {
 
   .blogpost-item {
     list-style: none;
-    border-radius: 5px;
-    border: 1pt solid lightgray;
-    box-shadow: 5px 5px 8px 5px rgb(235, 235, 235);
-    padding: 15px;
   }
 }
 </style>

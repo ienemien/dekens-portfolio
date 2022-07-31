@@ -6,7 +6,7 @@ import axios, { type AxiosResponse } from "axios";
 
 export default class BlogPostService {
   private static AXIOS_CONFIG = { timeout: 3000 };
-  private static POSTS_URL = "/api/posts";
+  private static POSTS_URL = "https://www.jojannekedekens.nl/wp-json/wp/v2/posts";
   private static DEFAULT_POSTS_PER_PAGE = 10;
   private alertStore = useAlertStore();
 

@@ -90,4 +90,22 @@ function hideLightbox() {
 <style lang="scss" scoped>
 @import "../assets/css/_content.scss";
 @import "../assets/css/_gallery.scss";
+
+article {
+  padding: 15px;
+
+  header {
+    margin-bottom: 15px;
+
+    h2 {
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+
+    time {
+      display: inline-block;
+      font-size: medium;
+    }
+  }
+}
 </style>

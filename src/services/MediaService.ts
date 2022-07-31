@@ -10,11 +10,27 @@ export default class MediaService {
   public async getMedia(
     item: BlogPost | Project | undefined
   ): Promise<Media[]> {
-    const mediaUrl = item?._links["wp:attachment"]?.[0].href;
-    if (mediaUrl) {
-      return (await axios.get(mediaUrl)).data as Media[];
+    let media = [] as Media[];
+    const mediaUrl = item?._links["wp:attachment"]?.[0].href + "&per_page=100";
+    const featuredUrl = item?._links["wp:featuredmedia"]?.[0].href;
+    if (mediaUrl && featuredUrl) {
+      const response = await axios.get(mediaUrl);
+      const attachments = response.data;
+      const featured = (await axios.get(featuredUrl)).data as Media;
+      media.push(featured);
+      media = media.concat(attachments);
+
+      // the media api can only return max. 100 media items per page, so if there's more get these too
+      const totalPages = parseInt(response.headers["x-wp-totalpages"] ?? "0");
+      if (totalPages > 1) {
+        for (let i = 2; i <= totalPages; i++) {
+          const moreMedia = (await axios.get(mediaUrl + "&page=" + i))
+            .data as Media[];
+          media = media.concat(moreMedia);
+        }
+      }
     }
-    return [];
+    return media;
   }
 
   public async getThumbnailUrl(

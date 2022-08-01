@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="social-buttons">
     <nav>
       <a
         href="http://nl.linkedin.com/pub/jojanneke-dekens/17/a4a/378"
@@ -17,8 +17,8 @@
   </div>
 </template>
 
-<styles scoped lang="scss">
-div {
+<styles lang="scss" scoped>
+.social-buttons {
   display: flex;
   justify-content: center;
   width: 100%;

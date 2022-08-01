@@ -34,14 +34,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   margin: 15px;
   border-radius: 5px;
   border: 1px solid darkgray;
+  padding: 10px;
 
   form {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    width: 90%;
     font-family: Arial, Helvetica, sans-serif;
 
     input {
@@ -51,22 +52,28 @@
 
       &.email-input {
         border: 1px solid darkgray;
+
+        @media screen and (min-width: 768px) {
+          width: 90%;
+        }
       }
 
       &.submit-button {
         color: white;
         background-color: black;
         cursor: pointer;
+        width: fit-content;
+        border: 0 solid white;
       }
     }
   }
 
   .mailchimp-button-wrapper {
+    width: 25%;
     margin: 10px;
     img {
       border-radius: 5px;
-      width: 10vw;
-      height: auto;
+      width: 100%;
     }
   }
 }

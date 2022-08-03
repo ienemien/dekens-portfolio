@@ -3,8 +3,8 @@ import BlogPostSummary from "@/components/BlogPostSummary.vue";
 import { useBlogPostStore } from "@/stores/BlogPostStore";
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import AppPagination from "../components/AppPagination.vue";
 import AppLoader from "../components/AppLoader.vue";
+import AppPagination from "../components/AppPagination.vue";
 
 const route = useRoute();
 const blogPostStore = useBlogPostStore();

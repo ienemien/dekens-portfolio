@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import AppPagination from "@/components/AppPagination.vue";
 import AppLoader from "@/components/AppLoader.vue";
+import AppPagination from "@/components/AppPagination.vue";
 import ProjectSummary from "@/components/ProjectSummary.vue";
-import { ref } from "@vue/reactivity";
+import { useScrollBack } from "@/composables/ScrollBack";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
-import { watch, onMounted } from "vue";
+import { ref } from "@vue/reactivity";
+import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const projectService = new ProjectService();
@@ -14,6 +15,8 @@ const projects = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
+const LOADER_TIME = 1000;
+useScrollBack("educationPos");
 
 watch(
   () => route.query.page,
@@ -37,7 +40,7 @@ async function fetchProjects() {
   const response = await projectService.fetchProjects(activePage.value, [112]);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
-  setTimeout(() => (loading.value = false), 1000);
+  setTimeout(() => (loading.value = false), LOADER_TIME);
 }
 </script>
 

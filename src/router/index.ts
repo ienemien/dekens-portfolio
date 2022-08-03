@@ -1,9 +1,5 @@
-import {
-  createRouter,
-  createWebHistory,
-  type RouteLocation,
-  type RouteRecordNormalized,
-} from "vue-router";
+import { useNavigationHistory } from "@/stores/NavigationHistory";
+import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
@@ -93,6 +89,8 @@ const router = createRouter({
 });
 
 router.beforeEach((toRoute, fromRoute, next) => {
+  const navHistory = useNavigationHistory();
+  navHistory.setLastVisitedRoute(fromRoute);
   window.document.title = (toRoute.meta?.title as string) ?? "Jojanneke Dekens";
 
   next();

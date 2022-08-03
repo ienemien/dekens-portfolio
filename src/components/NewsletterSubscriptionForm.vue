@@ -11,7 +11,7 @@
         type="email"
         name="MERGE0"
         id="MERGE0"
-        placeholder="Uw emailadres"
+        placeholder="Je emailadres"
         class="email-input"
       />
       <input type="submit" value="Aanmelden" class="submit-button" />

@@ -8,6 +8,7 @@ import ProjectService from "@/services/ProjectService";
 import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useScrollBack } from "@/composables/ScrollBack";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
@@ -15,6 +16,7 @@ const projects = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
+useScrollBack("workPos");
 
 watch(
   () => route.query.page,

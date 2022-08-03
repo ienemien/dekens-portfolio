@@ -2,7 +2,7 @@
 import AppLoader from "@/components/AppLoader.vue";
 import AppPagination from "@/components/AppPagination.vue";
 import ProjectSummary from "@/components/ProjectSummary.vue";
-import PageDetails from "@/components/PageDetails.vue";
+import { useScrollBack } from "@/composables/ScrollBack";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
 import { ref } from "@vue/reactivity";
@@ -15,6 +15,7 @@ const projects = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
+useScrollBack("shopPos");
 
 watch(
   () => route.query.page,

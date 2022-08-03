@@ -6,7 +6,8 @@ import axios, { type AxiosResponse } from "axios";
 export default class ProjectService {
   private static AXIOS_CONFIG = { timeout: 3000 };
   private alertStore = useAlertStore();
-  private static PROJECTS_URL = "https://www.jojannekedekens.nl/wp-json/wp/v2/projects";
+  private static PROJECTS_URL =
+    "https://www.jojannekedekens.nl/wp-json/wp/v2/projects";
   private static DEFAULT_PROJECTS_PER_PAGE = 9;
 
   public async fetchProjects(

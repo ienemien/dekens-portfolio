@@ -5,7 +5,8 @@ import axios from "axios";
 export default class PageService {
   private static AXIOS_CONFIG = { timeout: 3000 };
   private alertStore = useAlertStore();
-  private static PAGES_URL = "https://www.jojannekedekens.nl/wp-json/wp/v2/pages";
+  private static PAGES_URL =
+    "https://www.jojannekedekens.nl/wp-json/wp/v2/pages";
 
   public async fetchPageBySlug(slug: string): Promise<Page | undefined> {
     const URL = `${PageService.PAGES_URL}?slug=${slug}`;

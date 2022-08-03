@@ -21,11 +21,11 @@ export function useScrollBack(storageKey: string) {
 
   onBeforeUnmount(async () => {
     const scrollEl = document.scrollingElement;
-    localStorage.setItem(storageKey, scrollEl?.scrollTop.toString() ?? "0");
+    navHistory.setScrollPosition(storageKey, scrollEl?.scrollTop ?? 0);
   });
 
   function scrollToPreviousPosition() {
-    const top = localStorage.getItem(storageKey);
+    const top = navHistory.scrollPosition(storageKey);
     if (top && document.scrollingElement) {
       document.scrollingElement.scrollTop = parseInt(top);
     }

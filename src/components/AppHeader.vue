@@ -58,6 +58,7 @@ onUnmounted(() => {
         active: showMenu,
       }"
       @click="toggleShowMenu"
+      @focusout="toggleShowMenu"
     >
       <span class="burger-line burger-line-1"></span>
       <span class="burger-line burger-line-2"></span>

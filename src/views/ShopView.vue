@@ -20,10 +20,8 @@ useScrollBack("shopPos");
 watch(
   () => route.query.page,
   async (newPageNr) => {
-    if (newPageNr) {
-      activePage.value = parseInt(newPageNr as string);
-      await fetchProjects();
-    }
+    activePage.value = parseInt((newPageNr ?? 1) as string);
+    await fetchProjects();
   }
 );
 

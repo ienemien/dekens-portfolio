@@ -13,10 +13,8 @@ const activePage = ref(1);
 watch(
   () => route.query.page,
   async (newPageNr) => {
-    if (newPageNr) {
-      activePage.value = parseInt(newPageNr as string);
-      await blogPostStore.fetchPosts(activePage.value);
-    }
+    activePage.value = parseInt((newPageNr ?? 1) as string);
+    await blogPostStore.fetchPosts(activePage.value);
   }
 );
 

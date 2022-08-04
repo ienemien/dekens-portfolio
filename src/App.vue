@@ -21,12 +21,12 @@ import AppAlertComponent from "./components/AppAlertComponent.vue";
   grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
 
   main {
-    padding: 120px 5px 10px 5px;
+    padding: 140px 10px 10px 10px;
     grid-column: 1 / span 8;
 
     @media screen and (min-width: 992px) {
-      grid-column: 1 / span 8;
-      padding: 100px 150px 10px 150px;
+      grid-column: 2 / span 6;
+      padding: 90px 10px 10px 10px;
     }
   }
 }

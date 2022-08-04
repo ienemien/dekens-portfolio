@@ -46,6 +46,7 @@ article {
   @media screen and (min-width: 768px) {
     flex: 30%;
     margin: 10px;
+    max-width: 30%;
   }
 
   a {

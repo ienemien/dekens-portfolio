@@ -22,6 +22,12 @@ watch(
   }
 );
 
+function closeMenu() {
+  if (!isWindowSizeLarge()) {
+    showMenu.value = false;
+  }
+}
+
 function toggleShowMenu() {
   if (!isWindowSizeLarge()) {
     showMenu.value = !showMenu.value;
@@ -58,7 +64,7 @@ onUnmounted(() => {
         active: showMenu,
       }"
       @click="toggleShowMenu"
-      @focusout="toggleShowMenu"
+      @blur="closeMenu"
     >
       <span class="burger-line burger-line-1"></span>
       <span class="burger-line burger-line-2"></span>
@@ -67,28 +73,28 @@ onUnmounted(() => {
     <Transition>
       <nav v-if="showMenu">
         <ul>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/">Home</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/werk">Werk</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/educatie">Educatie</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/atelier">Atelier</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/winkel">Winkel</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/cv">CV</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/contact">Contact</RouterLink>
           </li>
-          <li @click="toggleShowMenu">
+          <li @click="closeMenu">
             <RouterLink to="/blog">Blog</RouterLink>
           </li>
         </ul>
@@ -179,7 +185,7 @@ header {
   }
 
   .v-leave-active {
-    transition: max-height 0.3s ease-in, opacity 0.2s ease-in;
+    transition: max-height 0.3s linear 0.3s, opacity 0.2s linear 0.3s;
   }
 
   .v-enter-from,

@@ -4,14 +4,16 @@
       <a
         href="http://nl.linkedin.com/pub/jojanneke-dekens/17/a4a/378"
         class="social-button"
+        target="blank"
       >
-        <img src="../assets/images/linkedin.png" target="blank" />
+        <img src="../assets/images/linkedin.png" />
       </a>
       <a
         href="https://www.instagram.com/insect.inspection"
         class="social-button"
+        target="blank"
       >
-        <img src="../assets/images/instagram.png" target="blank" />
+        <img src="../assets/images/instagram.png" />
       </a>
     </nav>
   </div>

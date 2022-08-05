@@ -20,8 +20,8 @@ import NewsletterSubscriptionForm from "../components/NewsletterSubscriptionForm
 
   &:deep(div) {
     box-sizing: border-box;
-    @media screen and (min-width: 768px) {
-      width: 40vw;
+    @media screen and (min-width: 992px) {
+      width: 25vw;
     }
   }
 }

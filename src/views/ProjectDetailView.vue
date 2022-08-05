@@ -60,6 +60,7 @@ function hideLightbox() {
       <h2 v-html="project?.title.rendered"></h2>
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
+    <div class="intro" v-html="project?.excerpt.rendered"></div>
     <div class="gallery" v-if="media && media.length > 0">
       <template v-for="(image, index) in media" :key="index">
         <img

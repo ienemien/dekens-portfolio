@@ -35,7 +35,11 @@ onMounted(async () => {
 
 async function fetchProjects() {
   loading.value = true;
-  const response = await projectService.fetchProjects(activePage.value, [112]);
+  const response = await projectService.fetchProjects(
+    activePage.value,
+    [112],
+    "date"
+  );
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
   setTimeout(() => (loading.value = false), LOADER_TIME);

@@ -24,7 +24,6 @@ onMounted(async () => {
           <img v-if="imgUrl" :src="imgUrl" />
           <div class="summary-info">
             <h2 v-html="project?.title.rendered"></h2>
-            <div v-html="project?.excerpt?.rendered"></div>
           </div>
         </div>
       </Transition>
@@ -73,10 +72,6 @@ article {
       background-color: white;
       opacity: 0.9;
       width: 100%;
-
-      h2 {
-        margin-block-start: 0;
-      }
 
       div {
         display: inline-block;

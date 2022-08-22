@@ -2,6 +2,7 @@
 import AppLoader from "@/components/AppLoader.vue";
 import AppPagination from "@/components/AppPagination.vue";
 import ProjectSummary from "@/components/ProjectSummary.vue";
+import PageDetails from "@/components/PageDetails.vue";
 import { useScrollBack } from "@/composables/ScrollBack";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
@@ -35,18 +36,15 @@ onMounted(async () => {
 
 async function fetchProjects() {
   loading.value = true;
-  const response = await projectService.fetchProjects(
-    activePage.value,
-    [112],
-    "date"
-  );
+  setTimeout(() => (loading.value = false), LOADER_TIME);
+  const response = await projectService.fetchProjects(activePage.value, [112]);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
-  setTimeout(() => (loading.value = false), LOADER_TIME);
 }
 </script>
 
 <template>
+  <PageDetails slug="educatie"></PageDetails>
   <AppLoader v-if="loading"></AppLoader>
   <TransitionGroup name="projects" tag="div" class="project-list">
     <ProjectSummary

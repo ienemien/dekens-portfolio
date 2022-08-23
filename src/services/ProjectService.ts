@@ -11,7 +11,8 @@ export default class ProjectService {
   private static DEFAULT_PROJECTS_PER_PAGE = 9;
 
   public async fetchProjects(
-    page: number,
+    page?: number,
+    per_page?: number,
     categories?: number[],
     orderBy?:
       | "author"
@@ -30,7 +31,9 @@ export default class ProjectService {
       total: 0,
       posts: [],
     };
-    let url = `${ProjectService.PROJECTS_URL}?page=${page}&per_page=${ProjectService.DEFAULT_PROJECTS_PER_PAGE}`;
+    let url = `${ProjectService.PROJECTS_URL}?page=${page ?? 1}&per_page=${
+      per_page ?? ProjectService.DEFAULT_PROJECTS_PER_PAGE
+    }`;
 
     if (categories && categories.length > 0) {
       url = `${url}&project-categories=${categories}`;
@@ -56,6 +59,29 @@ export default class ProjectService {
         "Helaas konden de projecten op dit moment niet worden opgehaald, probeer het later nog eens."
       );
     }
+  }
+
+  public async fetchProjectsInOrder(
+    firstCategory: number,
+    lastCategory: number
+  ): Promise<PostResponse | undefined> {
+    const projectsResponse: PostResponse = {
+      totalPages: 0,
+      total: 0,
+      posts: [],
+    };
+
+    const currentProjects =
+      ((await this.fetchProjects(1, 100, [firstCategory]))
+        ?.posts as Project[]) ?? [];
+    const pastProjects =
+      ((await this.fetchProjects(1, 100, [lastCategory]))
+        ?.posts as Project[]) ?? [];
+    projectsResponse.posts = currentProjects.concat(pastProjects);
+    projectsResponse.totalPages = Math.floor(projectsResponse.posts.length / 9);
+    projectsResponse.total = projectsResponse.posts.length;
+
+    return projectsResponse;
   }
 
   public async fetchProject(projectId: string): Promise<Project | undefined> {

@@ -37,6 +37,7 @@ async function fetchProjects() {
   loading.value = true;
   const response = await projectService.fetchProjects(
     activePage.value,
+    9,
     [111, 110],
     "modified"
   );

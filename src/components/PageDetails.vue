@@ -35,12 +35,12 @@ article {
   align-items: center;
 
   img {
-    width: 70vw;
+    width: 80vw;
     height: auto;
 
     @media screen and (min-width: 768px) {
       width: auto;
-      height: 70vh;
+      height: 60vh;
     }
   }
 }

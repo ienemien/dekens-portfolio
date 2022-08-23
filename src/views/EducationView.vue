@@ -13,6 +13,7 @@ import { useRoute } from "vue-router";
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
 const projects = ref<Project[]>([]);
+const projectsForPage = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
@@ -34,12 +35,23 @@ onMounted(async () => {
   await fetchProjects();
 });
 
-async function fetchProjects() {
+async function fetchProjects(): Promise<void> {
   loading.value = true;
   setTimeout(() => (loading.value = false), LOADER_TIME);
-  const response = await projectService.fetchProjects(activePage.value, [112]);
+  const response = await projectService.fetchProjectsInOrder(112, 113);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
+  projectsForPage.value = projects.value.slice(calcStart(), calcEnd());
+}
+
+function calcStart(): number {
+  return (activePage.value - 1) * 9;
+}
+
+function calcEnd(): number {
+  return activePage.value === totalPages.value
+    ? projects.value.length
+    : activePage.value * 9;
 }
 </script>
 
@@ -48,7 +60,7 @@ async function fetchProjects() {
   <AppLoader v-if="loading"></AppLoader>
   <TransitionGroup name="projects" tag="div" class="project-list">
     <ProjectSummary
-      v-for="project in projects"
+      v-for="project in projectsForPage"
       :key="project.id"
       :project="project"
     />

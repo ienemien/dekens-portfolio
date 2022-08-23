@@ -39,9 +39,11 @@ onMounted(async () => {
 async function fetchProjects(): Promise<void> {
   loading.value = true;
   setTimeout(() => (loading.value = false), LOADER_TIME);
-  const response = await projectService.fetchProjectsInOrder(110, 111);
-  projects.value = (response?.posts as Project[]) ?? [];
-  totalPages.value = response?.totalPages ?? 1;
+  if (projects.value.length === 0) {
+    const response = await projectService.fetchProjectsInOrder(110, 111);
+    projects.value = (response?.posts as Project[]) ?? [];
+    totalPages.value = response?.totalPages ?? 1;
+  }
   const { start, end } = useCalculateStartEnd(
     activePage.value,
     totalPages.value,

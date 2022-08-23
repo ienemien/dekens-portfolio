@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppLoader from "@/components/AppLoader.vue";
 import AppPagination from "@/components/AppPagination.vue";
+import PageDetails from "@/components/PageDetails.vue";
 import ProjectSummary from "@/components/ProjectSummary.vue";
 import { useScrollBack } from "@/composables/ScrollBack";
 import type Project from "@/model/Project";
@@ -47,6 +48,7 @@ async function fetchProjects() {
 </script>
 
 <template>
+  <PageDetails slug="winkel"></PageDetails>
   <AppLoader v-if="loading"></AppLoader>
   <TransitionGroup name="list" tag="div" class="project-list">
     <ProjectSummary

@@ -9,14 +9,17 @@ import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useScrollBack } from "@/composables/ScrollBack";
+import { useCalculateStartEnd } from "@/composables/CalculateStartEnd";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
 const projects = ref<Project[]>([]);
+const projectsForPage = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
 useScrollBack("workPos");
+const LOADER_TIME = 1000;
 
 watch(
   () => route.query.page,
@@ -33,17 +36,18 @@ onMounted(async () => {
   await fetchProjects();
 });
 
-async function fetchProjects() {
+async function fetchProjects(): Promise<void> {
   loading.value = true;
-  const response = await projectService.fetchProjects(
-    activePage.value,
-    9,
-    [111, 110],
-    "modified"
-  );
+  setTimeout(() => (loading.value = false), LOADER_TIME);
+  const response = await projectService.fetchProjectsInOrder(110, 111);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
-  setTimeout(() => (loading.value = false), 1000);
+  const { start, end } = useCalculateStartEnd(
+    activePage.value,
+    totalPages.value,
+    projects.value.length
+  );
+  projectsForPage.value = projects.value.slice(start, end);
 }
 </script>
 
@@ -53,7 +57,7 @@ async function fetchProjects() {
   <TransitionGroup name="list" tag="div" class="project-list">
     <ProjectSummary
       :project="project"
-      v-for="project in projects"
+      v-for="project in projectsForPage"
       :key="project.id"
     />
   </TransitionGroup>

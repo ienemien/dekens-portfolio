@@ -9,6 +9,7 @@ import ProjectService from "@/services/ProjectService";
 import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useCalculateStartEnd } from "@/composables/CalculateStartEnd";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
@@ -41,17 +42,12 @@ async function fetchProjects(): Promise<void> {
   const response = await projectService.fetchProjectsInOrder(112, 113);
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
-  projectsForPage.value = projects.value.slice(calcStart(), calcEnd());
-}
-
-function calcStart(): number {
-  return (activePage.value - 1) * 9;
-}
-
-function calcEnd(): number {
-  return activePage.value === totalPages.value
-    ? projects.value.length
-    : activePage.value * 9;
+  const { start, end } = useCalculateStartEnd(
+    activePage.value,
+    totalPages.value,
+    projects.value.length
+  );
+  projectsForPage.value = projects.value.slice(start, end);
 }
 </script>
 

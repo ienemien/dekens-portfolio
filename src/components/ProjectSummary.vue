@@ -72,15 +72,6 @@ article {
       background-color: white;
       opacity: 0.9;
       width: 100%;
-
-      div {
-        display: inline-block;
-
-        &:deep(p) {
-          margin-block-start: 0;
-          margin-block-end: 0;
-        }
-      }
     }
   }
 }

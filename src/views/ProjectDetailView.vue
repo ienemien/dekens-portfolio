@@ -66,7 +66,7 @@ function hideLightbox() {
         <img
           v-if="image.media_type === 'image'"
           :src="
-            image.media_details.sizes.medium?.source_url ?? image.source_url
+            image.media_details?.sizes?.medium?.source_url ?? image.source_url
           "
           @click="showLightbox(index)"
         />

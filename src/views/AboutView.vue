@@ -3,5 +3,5 @@ import PageDetails from "@/components/PageDetails.vue";
 </script>
 
 <template>
-  <PageDetails slug="atelier"></PageDetails>
+  <PageDetails slug="over-mij"></PageDetails>
 </template>

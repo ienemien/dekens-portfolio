@@ -83,10 +83,10 @@ onUnmounted(() => {
             <RouterLink to="/educatie">Educatie</RouterLink>
           </li>
           <li @click="closeMenu">
-            <RouterLink to="/atelier">Atelier</RouterLink>
+            <RouterLink to="/winkel">Winkel</RouterLink>
           </li>
           <li @click="closeMenu">
-            <RouterLink to="/winkel">Winkel</RouterLink>
+            <RouterLink to="/over-mij">Over mij</RouterLink>
           </li>
           <li @click="closeMenu">
             <RouterLink to="/cv">CV</RouterLink>

@@ -38,11 +38,11 @@ const router = createRouter({
       },
     },
     {
-      path: "/atelier",
-      name: "atelier",
-      component: () => import("../views/AtelierView.vue"),
+      path: "/over-mij",
+      name: "about",
+      component: () => import("../views/AboutView.vue"),
       meta: {
-        title: "Atelier",
+        title: "Over mij",
       },
     },
     {

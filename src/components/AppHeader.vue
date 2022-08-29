@@ -215,7 +215,7 @@ header {
       margin: 10px 0;
 
       li {
-        margin: 2px 5px;
+        margin: 2px 8px;
 
         @media screen and (min-width: 992px) {
           display: inline;
@@ -228,6 +228,10 @@ header {
 
           &:visited {
             color: black;
+          }
+
+          &.router-link-active {
+            font-weight: bold;
           }
         }
       }

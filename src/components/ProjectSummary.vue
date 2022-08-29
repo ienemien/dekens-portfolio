@@ -64,6 +64,8 @@ article {
     }
 
     .summary-info {
+      display: flex;
+      align-items: center;
       box-sizing: border-box;
       position: absolute;
       left: 0;
@@ -72,6 +74,13 @@ article {
       background-color: white;
       opacity: 0.9;
       width: 100%;
+      height: 95px;
+
+      h2 {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin: 1px 0;
+      }
     }
   }
 }

@@ -106,7 +106,6 @@ onUnmounted(() => {
 header {
   position: fixed;
   width: 100%;
-  grid-column: 1 / span 8;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   align-items: flex-start;

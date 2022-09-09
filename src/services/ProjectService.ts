@@ -79,7 +79,9 @@ export default class ProjectService {
       ((await this.fetchProjects(1, 100, [lastCategory]))
         ?.posts as Project[]) ?? [];
     projectsResponse.posts = currentProjects.concat(pastProjects);
-    projectsResponse.totalPages = Math.floor(projectsResponse.posts.length / perPage);
+    projectsResponse.totalPages = Math.floor(
+      projectsResponse.posts.length / PER_PAGE
+    );
     projectsResponse.total = projectsResponse.posts.length;
 
     return projectsResponse;

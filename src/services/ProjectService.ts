@@ -63,14 +63,15 @@ export default class ProjectService {
 
   public async fetchProjectsInOrder(
     firstCategory: number,
-    lastCategory: number
+    lastCategory: number,
+    perPage?: number
   ): Promise<PostResponse | undefined> {
     const projectsResponse: PostResponse = {
       totalPages: 0,
       total: 0,
       posts: [],
     };
-
+    const PER_PAGE = perPage ?? 9;
     const currentProjects =
       ((await this.fetchProjects(1, 100, [firstCategory]))
         ?.posts as Project[]) ?? [];
@@ -78,7 +79,7 @@ export default class ProjectService {
       ((await this.fetchProjects(1, 100, [lastCategory]))
         ?.posts as Project[]) ?? [];
     projectsResponse.posts = currentProjects.concat(pastProjects);
-    projectsResponse.totalPages = Math.floor(projectsResponse.posts.length / 9);
+    projectsResponse.totalPages = Math.floor(projectsResponse.posts.length / perPage);
     projectsResponse.total = projectsResponse.posts.length;
 
     return projectsResponse;

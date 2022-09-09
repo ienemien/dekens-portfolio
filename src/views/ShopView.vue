@@ -16,6 +16,7 @@ const projects = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
+const PER_PAGE = 30;
 useScrollBack("shopPos");
 
 watch(
@@ -37,9 +38,8 @@ async function fetchProjects() {
   loading.value = true;
   const response = await projectService.fetchProjects(
     activePage.value,
-    9,
-    [119],
-    "modified"
+    PER_PAGE,
+    [119]
   );
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;
@@ -59,7 +59,7 @@ async function fetchProjects() {
   </TransitionGroup>
 
   <AppPagination
-    v-if="activePage && totalPages"
+    v-if="activePage && totalPages && totalPages > 1"
     :route-name="'shop'"
     :active-page="activePage"
     :page-count="totalPages"

@@ -80,6 +80,34 @@ function hideLightbox() {
         :imgs="lightboxImgs"
         @hide="hideLightbox"
       >
+        <template v-slot:toolbar="{ toolbarMethods }">
+          <div class="vel-toolbar">
+            <div
+              class="toolbar-btn toolbar-btn__zoomin"
+              @click="toolbarMethods.zoomIn"
+            >
+              <svg class="vel-icon icon" aria-hidden="true">
+                <use xlink:href="#icon-zoomin"></use>
+              </svg>
+            </div>
+            <div
+              class="toolbar-btn toolbar-btn__zoomout"
+              @click="toolbarMethods.zoomOut"
+            >
+              <svg class="vel-icon icon" aria-hidden="true">
+                <use xlink:href="#icon-zoomout"></use>
+              </svg>
+            </div>
+            <div
+              class="toolbar-btn toolbar-btn__resize"
+              @click="toolbarMethods.resize"
+            >
+              <svg class="vel-icon icon" aria-hidden="true">
+                <use xlink:href="#icon-resize"></use>
+              </svg>
+            </div>
+          </div>
+        </template>
       </VueEasyLightbox>
     </div>
     <div class="content" v-html="project?.content.rendered"></div>
@@ -106,6 +134,10 @@ article {
       display: inline-block;
       font-size: medium;
     }
+  }
+
+  &:deep(.vel-img-title) {
+    display: none;
   }
 }
 </style>

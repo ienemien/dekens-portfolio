@@ -33,9 +33,6 @@ const router = createRouter({
       path: "/project/:id",
       name: "project",
       component: () => import("../views/ProjectDetailView.vue"),
-      meta: {
-        title: "Project",
-      },
     },
     {
       path: "/over-mij",

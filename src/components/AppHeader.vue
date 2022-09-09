@@ -53,11 +53,10 @@ onUnmounted(() => {
 
 <template>
   <header>
-    <RouterLink to="/" class="title"
-      ><h1>
-        Jojanneke Dekens<span v-if="title"> - {{ title }}</span>
-      </h1></RouterLink
-    >
+    <div class="title">
+      <RouterLink to="/"><h1>Jojanneke Dekens</h1></RouterLink>
+      <h2 v-if="title" class="subtitle">{{ title }}</h2>
+    </div>
     <button
       class="burger-menu"
       :class="{
@@ -107,23 +106,36 @@ onUnmounted(() => {
 header {
   position: fixed;
   width: 100%;
+  grid-column: 1 / span 8;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  align-items: center;
-  padding: 10px 0;
+  align-items: flex-start;
+  padding: 20px 0;
   background-color: white;
   z-index: 5;
   opacity: 0.95;
 
   .title {
-    grid-column: 2 / span 2;
-    text-decoration: none;
+    grid-column: 2 / span 5;
+
+    @media screen and (min-width: 992px) {
+      grid-column: 2 / span 2;
+    }
+
+    a {
+      text-decoration: none;
+    }
 
     h1 {
       font-size: larger;
       margin: 0;
-      text-decoration: none;
       color: black;
+    }
+
+    .subtitle {
+      font-size: large;
+      font-weight: normal;
+      margin: 0;
     }
   }
 
@@ -212,7 +224,7 @@ header {
     ul {
       text-align: center;
       list-style: none;
-      margin: 10px 0;
+      margin: 0;
 
       li {
         margin: 2px 8px;

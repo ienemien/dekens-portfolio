@@ -1,10 +1,12 @@
 export function useCalculateStartEnd(
   pageNumber: number,
   totalPages: number,
-  totalProjects: number
+  totalProjects: number,
+  perPage?: number
 ) {
-  const start = (pageNumber - 1) * 9;
-  const end = pageNumber === totalPages ? totalProjects : pageNumber * 9;
+  const PER_PAGE = perPage ?? 9;
+  const start = (pageNumber - 1) * PER_PAGE;
+  const end = pageNumber === totalPages ? totalProjects : pageNumber * PER_PAGE;
 
   return { start, end };
 }

@@ -28,6 +28,11 @@ import AppAlertComponent from "./components/AppAlertComponent.vue";
       grid-column: 2 / span 6;
       padding: 90px 10px 10px 10px;
     }
+
+    &:deep(a) {
+      color: black;
+      font-weight: bold;
+    }
   }
 }
 </style>

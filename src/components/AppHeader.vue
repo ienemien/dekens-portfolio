@@ -110,7 +110,7 @@ header {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   align-items: flex-start;
-  padding: 20px 0;
+  padding: 20px 0 5px 0;
   background-color: white;
   z-index: 5;
   opacity: 0.95;

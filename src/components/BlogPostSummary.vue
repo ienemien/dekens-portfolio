@@ -56,7 +56,10 @@ article {
 
     img {
       margin: 0 0 5px 5px;
-      float: right;
+
+      @media screen and (min-width: 992px) {
+        float: right;
+      }
     }
   }
 

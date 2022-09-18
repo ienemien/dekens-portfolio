@@ -10,6 +10,7 @@ import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useCalculateStartEnd } from "@/composables/CalculateStartEnd";
+import { CategoryType } from "@/model/CategoryType";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
@@ -42,8 +43,8 @@ async function fetchProjects(): Promise<void> {
   setTimeout(() => (loading.value = false), LOADER_TIME);
   if (projects.value.length === 0) {
     const response = await projectService.fetchProjectsInOrder(
-      112,
-      113,
+      CategoryType.EDUCATIE_HEDEN,
+      CategoryType.EDUCATIE_VERLEDEN,
       PER_PAGE
     );
     projects.value = (response?.posts as Project[]) ?? [];

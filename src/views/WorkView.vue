@@ -10,6 +10,7 @@ import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useScrollBack } from "@/composables/ScrollBack";
 import { useCalculateStartEnd } from "@/composables/CalculateStartEnd";
+import { CategoryType } from "@/model/CategoryType";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
@@ -42,8 +43,8 @@ async function fetchProjects(): Promise<void> {
   setTimeout(() => (loading.value = false), LOADER_TIME);
   if (projects.value.length === 0) {
     const response = await projectService.fetchProjectsInOrder(
-      110,
-      111,
+      CategoryType.WERK_HEDEN,
+      CategoryType.WERK_VERLEDEN,
       PER_PAGE
     );
     projects.value = (response?.posts as Project[]) ?? [];

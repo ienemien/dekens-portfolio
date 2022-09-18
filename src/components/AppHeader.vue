@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import {
-  onMounted,
-  onUnmounted,
-  onUpdated,
-  ref,
-  watch,
-} from "@vue/runtime-dom";
+import { useCategory } from "@/stores/CategoryStore";
+import { onMounted, onUnmounted, ref, watchEffect } from "@vue/runtime-dom";
 import { RouterLink, useRoute } from "vue-router";
 
 const route = useRoute();
 const isWindowSizeLarge = () => window.innerWidth >= 992;
 const showMenu = ref(isWindowSizeLarge());
 const title = ref("");
+const categoryStore = useCategory();
 
-watch(
-  () => route.meta.title,
-  async (newTitle) => {
-    if (newTitle) {
-      title.value = newTitle as string;
-    }
+watchEffect(async () => {
+  const newTitle = route.meta.title;
+  if (newTitle === "Project") {
+    title.value = (await categoryStore.currentCategoryName) ?? "";
+  } else {
+    title.value = newTitle as string;
   }
-);
+});
 
 function closeMenu() {
   if (!isWindowSizeLarge()) {
@@ -40,10 +36,6 @@ function onWindowResize() {
 
 onMounted(() => {
   window.addEventListener("resize", onWindowResize);
-});
-
-onUpdated(() => {
-  title.value = route.meta.title as string;
 });
 
 onUnmounted(() => {

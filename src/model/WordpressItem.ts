@@ -1,12 +1,4 @@
-interface link {
-  href: string;
-  embeddable?: boolean;
-  count?: number;
-  id?: number;
-  taxonomy?: string;
-  name?: string;
-  templated?: boolean;
-}
+import type WordpressLinks from "./WordpressLinks";
 
 export default interface WordpressItem {
   id: number;
@@ -45,18 +37,5 @@ export default interface WordpressItem {
   categories: number[];
   tags: string[];
   jetpackFeaturedMediaUrl: string;
-  _links: {
-    self: link[];
-    collection: link[];
-    about: link[];
-    author: link[];
-    replies: link[];
-    versionHistory: link[];
-    predecessorVersion: link[];
-    "wp:attachment": link[];
-    wpTerm: link[];
-    curies: link[];
-    "wp:featuredmedia": link[];
-    "wp:term": link[];
-  };
+  _links: WordpressLinks;
 }

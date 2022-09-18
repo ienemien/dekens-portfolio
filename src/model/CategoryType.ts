@@ -1,0 +1,7 @@
+export enum CategoryType {
+  EDUCATIE_HEDEN = 112,
+  EDUCATIE_VERLEDEN = 113,
+  WERK_HEDEN = 110,
+  WERK_VERLEDEN = 111,
+  WINKEL = 119,
+}

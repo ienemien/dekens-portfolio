@@ -9,6 +9,7 @@ import ProjectService from "@/services/ProjectService";
 import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
+import { CategoryType } from "@/model/CategoryType";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
@@ -39,7 +40,7 @@ async function fetchProjects() {
   const response = await projectService.fetchProjects(
     activePage.value,
     PER_PAGE,
-    [119]
+    [CategoryType.WINKEL]
   );
   projects.value = (response?.posts as Project[]) ?? [];
   totalPages.value = response?.totalPages ?? 1;

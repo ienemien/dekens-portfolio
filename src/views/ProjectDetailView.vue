@@ -5,6 +5,7 @@ import type Media from "@/model/Media";
 import type Project from "@/model/Project";
 import MediaService from "@/services/MediaService";
 import ProjectService from "@/services/ProjectService";
+import { useCategory } from "@/stores/CategoryStore";
 import { computed } from "@vue/reactivity";
 import dayjs from "dayjs";
 import { onMounted, ref } from "vue";
@@ -13,6 +14,7 @@ import { useRoute } from "vue-router";
 
 const projectService = new ProjectService();
 const mediaService = new MediaService();
+const categoryStore = useCategory();
 const project = ref<Project>();
 const media = ref<Media[]>([]);
 const lightboxVisible = ref<boolean>(false);
@@ -39,6 +41,7 @@ onMounted(async () => {
   );
   media.value = await mediaService.getMedia(project.value);
   const regex = /&#[0-9]{4};/g;
+  categoryStore.setCategoryId(project.value?.["project-categories"][0]);
   document.title =
     project.value?.title.rendered.replace(regex, "'") ??
     (route.meta.title as string);

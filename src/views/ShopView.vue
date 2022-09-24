@@ -10,15 +10,18 @@ import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { CategoryType } from "@/model/CategoryType";
+import { useCalculateStartEnd } from "@/composables/CalculateStartEnd";
 
 const projectService = new ProjectService();
 const loading = ref<boolean>(false);
 const projects = ref<Project[]>([]);
+const projectsForPage = ref<Project[]>([]);
 const route = useRoute();
 const activePage = ref(1);
 const totalPages = ref(1);
 const PER_PAGE = 30;
 useScrollBack("shopPos");
+const LOADER_TIME = 1000;
 
 watch(
   () => route.query.page,
@@ -35,16 +38,25 @@ onMounted(async () => {
   await fetchProjects();
 });
 
-async function fetchProjects() {
+async function fetchProjects(): Promise<void> {
   loading.value = true;
-  const response = await projectService.fetchProjects(
+  setTimeout(() => (loading.value = false), LOADER_TIME);
+  if (projects.value.length === 0) {
+    const response = await projectService.fetchProjectsInOrder(
+      CategoryType.WINKEL_HEDEN,
+      CategoryType.WINKEL_VERLEDEN,
+      PER_PAGE
+    );
+    projects.value = (response?.posts as Project[]) ?? [];
+    totalPages.value = response?.totalPages ?? 1;
+  }
+  const { start, end } = useCalculateStartEnd(
     activePage.value,
-    PER_PAGE,
-    [CategoryType.WINKEL]
+    totalPages.value,
+    projects.value.length,
+    PER_PAGE
   );
-  projects.value = (response?.posts as Project[]) ?? [];
-  totalPages.value = response?.totalPages ?? 1;
-  setTimeout(() => (loading.value = false), 1000);
+  projectsForPage.value = projects.value.slice(start, end);
 }
 </script>
 
@@ -54,7 +66,7 @@ async function fetchProjects() {
   <TransitionGroup name="list" tag="div" class="project-list">
     <ProjectSummary
       :project="project"
-      v-for="project in projects"
+      v-for="project in projectsForPage"
       :key="project.id"
     />
   </TransitionGroup>

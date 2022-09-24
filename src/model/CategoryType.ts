@@ -4,4 +4,6 @@ export enum CategoryType {
   WERK_HEDEN = 110,
   WERK_VERLEDEN = 111,
   WINKEL = 119,
+  WINKEL_HEDEN = 128,
+  WINKEL_VERLEDEN = 129,
 }

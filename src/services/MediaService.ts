@@ -1,4 +1,5 @@
 import type BlogPost from "@/model/BlogPost";
+import type Image from "@/model/Image";
 import type Media from "@/model/Media";
 import type Page from "@/model/Page";
 import type Project from "@/model/Project";
@@ -31,6 +32,28 @@ export default class MediaService {
       }
     }
     return media;
+  }
+
+  /**
+   * Custom endpoint added to functions.php to get the project gallery (the selection of pictures in the right order)
+   *
+   *
+   * @param item project
+   * @returns the image gallery belonging to the project
+   */
+  public async getProjectGallery(item: Project | undefined): Promise<Image[]> {
+    let images = [] as Image[];
+    if (item) {
+      const galleryUrl = `https://www.jojannekedekens.nl/wp-json/gallery-plugin/v1/project/${item.id}`;
+      const response = await axios.get(galleryUrl);
+      //the endpoint returns the images as posts, but we only need the title and src
+      images = response.data.map(
+        (img: { post_title: string; guid: string }) => {
+          return { title: img.post_title, src: img.guid };
+        }
+      );
+    }
+    return images;
   }
 
   public async getThumbnailUrl(

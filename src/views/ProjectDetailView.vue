@@ -1,7 +1,7 @@
 Media
 <script setup lang="ts">
 import AppBackButton from "@/components/AppBackButton.vue";
-import type Media from "@/model/Media";
+import type Image from "@/model/Image";
 import type Project from "@/model/Project";
 import MediaService from "@/services/MediaService";
 import ProjectService from "@/services/ProjectService";
@@ -16,7 +16,7 @@ const projectService = new ProjectService();
 const mediaService = new MediaService();
 const categoryStore = useCategory();
 const project = ref<Project>();
-const media = ref<Media[]>([]);
+const images = ref<Image[]>([]);
 const lightboxVisible = ref<boolean>(false);
 const lightboxIndex = ref<number>(0);
 const route = useRoute();
@@ -28,18 +28,12 @@ const postDateTime = computed(() =>
   dayjs(project?.value?.date).format("YYYY-MM-DD")
 );
 
-const lightboxImgs = computed(() =>
-  media.value.map((img) => {
-    return { title: img.title.rendered, src: img.source_url };
-  })
-);
-
 onMounted(async () => {
   const routeParamId = route.params["id"];
   project.value = await projectService.fetchProject(
     Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
   );
-  media.value = await mediaService.getMedia(project.value);
+  images.value = await mediaService.getProjectGallery(project.value);
   const regex = /&#[0-9]{4};/g;
   categoryStore.setCategoryId(project.value?.["project-categories"][0]);
   document.title =
@@ -64,15 +58,9 @@ function hideLightbox() {
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
     <div class="intro" v-html="project?.excerpt.rendered"></div>
-    <div class="gallery" v-if="media && media.length > 0">
-      <template v-for="(image, index) in media" :key="index">
-        <img
-          v-if="image.media_type === 'image'"
-          :src="
-            image.media_details?.sizes?.medium?.source_url ?? image.source_url
-          "
-          @click="showLightbox(index)"
-        />
+    <div class="gallery" v-if="images && images.length > 0">
+      <template v-for="(image, key, index) in images" :key="image.id">
+        <img :src="image.src" @click="showLightbox(index)" />
       </template>
       <VueEasyLightbox
         scrollDisabled
@@ -80,7 +68,7 @@ function hideLightbox() {
         moveDisabled
         :index="lightboxIndex"
         :visible="lightboxVisible"
-        :imgs="lightboxImgs"
+        :imgs="images"
         @hide="hideLightbox"
       >
         <template v-slot:toolbar="{ toolbarMethods }">

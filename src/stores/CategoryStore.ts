@@ -25,7 +25,6 @@ export const useCategory = defineStore({
   },
   actions: {
     setCategoryId(categoryId: number | undefined): void {
-      console.log(`setting category id: ${categoryId}`);
       if (categoryId) {
         this.categoryId = categoryId;
       }

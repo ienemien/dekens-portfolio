@@ -41,7 +41,9 @@ onUnmounted(() => {
   <header>
     <div class="title">
       <RouterLink to="/"><h1>Jojanneke Dekens</h1></RouterLink>
-      <h2 v-if="title" class="subtitle">{{ title }}</h2>
+      <RouterLink :to="`/${route.path.split('/')[1]}`"
+        ><h2 v-if="title" class="subtitle">{{ title }}</h2></RouterLink
+      >
     </div>
     <button
       class="burger-menu"
@@ -109,11 +111,14 @@ header {
 
     a {
       text-decoration: none;
+      &:visited {
+        color: black;
+      }
     }
 
     h1 {
       font-size: larger;
-      margin: 0;
+      margin: 0 0 5px 0;
       color: black;
     }
 

@@ -12,7 +12,9 @@ export function useScrollBack(storageKey: string) {
     const lastRoute = routes[routes.length - 1];
     const nextToLastRoute = routes[routes.length - 2];
     if (
-      lastRoute.name === "project" &&
+      ["education-detail", "shop-detail", "work-detail"].includes(
+        lastRoute.name?.toString() ?? ""
+      ) &&
       nextToLastRoute.fullPath === route.fullPath
     ) {
       setTimeout(() => scrollToPreviousPosition(), LOADER_TIME);

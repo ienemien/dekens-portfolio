@@ -68,6 +68,7 @@ async function fetchProjects(): Promise<void> {
       v-for="project in projectsForPage"
       :key="project.id"
       :project="project"
+      :route-name="'education-detail'"
     />
   </TransitionGroup>
   <AppPagination

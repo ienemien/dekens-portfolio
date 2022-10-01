@@ -22,6 +22,14 @@ const router = createRouter({
       },
     },
     {
+      path: "/werk/:id",
+      name: "work-detail",
+      component: () => import("../views/ProjectDetailView.vue"),
+      meta: {
+        title: "Werk",
+      },
+    },
+    {
       path: "/educatie",
       name: "education",
       component: () => import("../views/EducationView.vue"),
@@ -30,11 +38,11 @@ const router = createRouter({
       },
     },
     {
-      path: "/project/:id",
-      name: "project",
+      path: "/educatie/:id",
+      name: "education-detail",
       component: () => import("../views/ProjectDetailView.vue"),
       meta: {
-        title: "Project",
+        title: "Educatie",
       },
     },
     {
@@ -49,6 +57,14 @@ const router = createRouter({
       path: "/winkel",
       name: "shop",
       component: () => import("../views/ShopView.vue"),
+      meta: {
+        title: "Winkel",
+      },
+    },
+    {
+      path: "/winkel/:id",
+      name: "shop-detail",
+      component: () => import("../views/ProjectDetailView.vue"),
       meta: {
         title: "Winkel",
       },

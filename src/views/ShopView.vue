@@ -68,6 +68,7 @@ async function fetchProjects(): Promise<void> {
       :project="project"
       v-for="project in projectsForPage"
       :key="project.id"
+      :route-name="'shop-detail'"
     />
   </TransitionGroup>
 

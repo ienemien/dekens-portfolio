@@ -9,6 +9,7 @@ const mediaService = new MediaService();
 const imgUrl = ref<string>();
 const props = defineProps<{
   project?: Project;
+  routeName?: string;
 }>();
 
 onMounted(async () => {
@@ -18,7 +19,9 @@ onMounted(async () => {
 
 <template>
   <article>
-    <RouterLink :to="{ name: 'project', params: { id: project?.id } }">
+    <RouterLink
+      :to="{ name: routeName ?? 'project', params: { id: project?.id } }"
+    >
       <Transition>
         <div>
           <img v-if="imgUrl" :src="imgUrl" />

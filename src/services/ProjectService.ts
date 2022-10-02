@@ -87,15 +87,15 @@ export default class ProjectService {
     return projectsResponse;
   }
 
-  public async fetchProject(projectId: string): Promise<Project | undefined> {
-    const URL = `${ProjectService.PROJECTS_URL}/${projectId}`;
+  public async fetchProject(slug: string): Promise<Project | undefined> {
+    const URL = `${ProjectService.PROJECTS_URL}?slug=${slug}`;
 
     try {
       const response: AxiosResponse = await axios.get(
         URL,
         ProjectService.AXIOS_CONFIG
       );
-      return response.data;
+      return response.data[0];
     } catch (err) {
       this.alertStore.addAlert(
         "Helaas kon het project op dit moment niet worden opgehaald, probeer het later nog eens."

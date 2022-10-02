@@ -20,7 +20,7 @@ onMounted(async () => {
 <template>
   <article>
     <RouterLink
-      :to="{ name: routeName ?? 'project', params: { id: project?.id } }"
+      :to="{ name: routeName ?? 'project', params: { slug: project?.slug } }"
     >
       <Transition>
         <div>

@@ -22,7 +22,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/werk/:id",
+      path: "/werk/:slug",
       name: "work-detail",
       component: () => import("../views/ProjectDetailView.vue"),
       meta: {
@@ -38,7 +38,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/educatie/:id",
+      path: "/educatie/:slug",
       name: "education-detail",
       component: () => import("../views/ProjectDetailView.vue"),
       meta: {
@@ -62,7 +62,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/winkel/:id",
+      path: "/winkel/:slug",
       name: "shop-detail",
       component: () => import("../views/ProjectDetailView.vue"),
       meta: {

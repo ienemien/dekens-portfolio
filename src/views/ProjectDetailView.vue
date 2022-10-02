@@ -27,9 +27,9 @@ const postDateTime = computed(() =>
 );
 
 onMounted(async () => {
-  const routeParamId = route.params["id"];
+  const slug = route.params["slug"];
   project.value = await projectService.fetchProject(
-    Array.isArray(routeParamId) ? routeParamId[0] : routeParamId
+    Array.isArray(slug) ? slug[0] : slug
   );
   images.value = await mediaService.getProjectGallery(project.value);
   const regex = /&#[0-9]{4};/g;

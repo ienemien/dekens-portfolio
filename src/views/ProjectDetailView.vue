@@ -57,7 +57,7 @@ function hideLightbox() {
     <div class="intro" v-html="project?.excerpt.rendered"></div>
     <div class="gallery" v-if="images && images.length > 0">
       <template v-for="(image, key, index) in images" :key="image.id">
-        <img :src="image.src" @click="showLightbox(index)" />
+        <img :src="image.thumbnail" @click="showLightbox(index)" />
       </template>
       <VueEasyLightbox
         scrollDisabled

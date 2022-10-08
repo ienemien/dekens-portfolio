@@ -1,28 +1,7 @@
+import type MediaDetails from "./MediaDetails";
+
 interface WordpressText {
   rendered: string;
-}
-
-interface MediaSize {
-  file: string;
-  width: number;
-  height: number;
-  mime_type: string;
-  source_url: string;
-}
-
-interface MediaDetails {
-  width: number;
-  height: number;
-  file: string;
-  sizes: {
-    medium: MediaSize;
-    thumbnail: MediaSize;
-    "project-archive": MediaSize;
-    "project-single": MediaSize;
-    "project-thumbnail": MediaSize;
-    full: MediaSize;
-  };
-  image_meta: unknown;
 }
 
 export default interface Media {

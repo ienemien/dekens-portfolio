@@ -1,6 +1,7 @@
 import type BlogPost from "@/model/BlogPost";
 import type Image from "@/model/Image";
 import type Media from "@/model/Media";
+import type MediaDetails from "@/model/MediaDetails";
 import type Page from "@/model/Page";
 import type Project from "@/model/Project";
 import axios from "axios";
@@ -48,8 +49,12 @@ export default class MediaService {
       const response = await axios.get(galleryUrl);
       //the endpoint returns the images as posts, but we only need the title and src
       images = response.data.map(
-        (img: { post_title: string; guid: string }) => {
-          return { title: img.post_title, src: img.guid };
+        (img: { data: { post_title: string }; meta: MediaDetails }) => {
+          return {
+            title: img.data.post_title,
+            src: img.meta.sizes.large.source_url,
+            thumbnail: img.meta.sizes["project-thumbnail"].source_url,
+          };
         }
       );
     }

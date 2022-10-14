@@ -78,11 +78,11 @@ const router = createRouter({
       },
     },
     {
-      path: "/post/:id",
-      name: "post",
+      path: "/blog/:id",
+      name: "blog-detail",
       component: () => import("../views/BlogPostDetailView.vue"),
       meta: {
-        title: "Blogpost",
+        title: "Blog",
       },
     },
     {

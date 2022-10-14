@@ -25,13 +25,15 @@ onMounted(async () => {
       <Transition>
         <img v-if="imgUrl" :src="imgUrl" />
       </Transition>
-      <h2 v-html="post?.title.rendered"></h2>
+      <RouterLink :to="{ name: 'blog-detail', params: { id: post?.id } }">
+        <h2 v-html="post?.title.rendered"></h2>
+      </RouterLink>
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
     <p v-html="post?.excerpt.rendered"></p>
-    <RouterLink :to="{ name: 'post', params: { id: post?.id } }"
-      >Lees verder &#10095;</RouterLink
-    >
+    <RouterLink :to="{ name: 'blog-detail', params: { id: post?.id } }">
+      Lees verder &#10095;
+    </RouterLink>
   </article>
 </template>
 

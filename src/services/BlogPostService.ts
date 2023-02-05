@@ -23,7 +23,7 @@ export default class BlogPostService {
 
     try {
       const response: AxiosResponse = await axios.get(
-        `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}`,
+        `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}&categories=131`,
         BlogPostService.AXIOS_CONFIG
       );
       blogPostResponse.posts = response.data;

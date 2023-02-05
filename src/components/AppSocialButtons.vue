@@ -2,7 +2,7 @@
   <div class="social-buttons">
     <nav>
       <a
-        href="http://nl.linkedin.com/pub/jojanneke-dekens/17/a4a/378"
+        href="https://nl.linkedin.com/pub/jojanneke-dekens/17/a4a/378"
         class="social-button"
         target="blank"
       >

@@ -7,7 +7,7 @@ export default class ProjectService {
   private static AXIOS_CONFIG = { timeout: 3000 };
   private alertStore = useAlertStore();
   private static PROJECTS_URL =
-    "https://www.jojannekedekens.nl/wp-json/wp/v2/projects";
+    "https://www.jojannekedekens.nl/wp-json/wp/v2/posts";
   private static DEFAULT_PROJECTS_PER_PAGE = 9;
 
   public async fetchProjects(
@@ -36,7 +36,7 @@ export default class ProjectService {
     }`;
 
     if (categories && categories.length > 0) {
-      url = `${url}&project-categories=${categories}`;
+      url = `${url}&categories=${categories}`;
     }
     if (orderBy) {
       url = `${url}&orderby=${orderBy}`;

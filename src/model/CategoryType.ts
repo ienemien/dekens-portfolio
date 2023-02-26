@@ -6,4 +6,5 @@ export enum CategoryType {
   WINKEL = 119,
   WINKEL_HEDEN = 128,
   WINKEL_VERLEDEN = 129,
+  BLOGPOST = 131,
 }

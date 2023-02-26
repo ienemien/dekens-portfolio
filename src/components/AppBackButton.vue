@@ -13,6 +13,8 @@ function goBack() {
 
 <style lang="scss" scoped>
 a {
+  display: block;
+  padding: 30px 0;
   font-weight: bold;
   cursor: pointer;
 }

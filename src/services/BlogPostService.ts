@@ -1,4 +1,5 @@
 import type BlogPost from "@/model/BlogPost";
+import { CategoryType } from "@/model/CategoryType";
 import type PostResponse from "@/model/PostResponse";
 import { useAlertStore } from "@/stores/AlertStore";
 import axios, { type AxiosResponse } from "axios";
@@ -23,7 +24,7 @@ export default class BlogPostService {
 
     try {
       const response: AxiosResponse = await axios.get(
-        `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}&categories=131`,
+        `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}&categories=${CategoryType.BLOGPOST}`,
         BlogPostService.AXIOS_CONFIG
       );
       blogPostResponse.posts = response.data;

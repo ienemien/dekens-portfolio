@@ -1,10 +1,7 @@
 import type BlogPost from "@/model/BlogPost";
-import type Image from "@/model/Image";
 import type Media from "@/model/Media";
-import type MediaDetails from "@/model/MediaDetails";
 import type Page from "@/model/Page";
 import type Project from "@/model/Project";
-import { isArray } from "@vue/shared";
 import axios from "axios";
 
 export default class MediaService {
@@ -34,39 +31,6 @@ export default class MediaService {
       }
     }
     return media;
-  }
-
-  /**
-   * Custom endpoint added to functions.php to get the project gallery (the selection of pictures in the right order)
-   *
-   *
-   * @param item project
-   * @returns the image gallery belonging to the project
-   */
-  public async getProjectGallery(item: Project | undefined): Promise<Image[]> {
-    let images = [] as Image[];
-    if (item) {
-      const galleryUrl = `https://www.jojannekedekens.nl/wp-json/gallery-plugin/v1/project/${item.id}`;
-      const response = await axios.get(galleryUrl);
-      //the endpoint returns the images as posts, but we only need the title and src
-      if (isArray(response.data)) {
-        images = response.data.map(
-          (img: {
-            data: { post_title: string; guid: string };
-            meta: MediaDetails;
-          }) => {
-            return {
-              title: img.data?.post_title,
-              src: img.meta?.sizes?.large?.source_url ?? img.data?.guid,
-              thumbnail:
-                img.meta?.sizes?.["project-thumbnail"]?.source_url ??
-                img.data?.guid,
-            };
-          }
-        );
-      }
-    }
-    return images;
   }
 
   public async getThumbnailUrl(

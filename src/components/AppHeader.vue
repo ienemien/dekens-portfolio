@@ -94,13 +94,13 @@ onUnmounted(() => {
 header {
   position: fixed;
   width: 100%;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: repeat(8, 1fr);
-  align-items: flex-start;
-  padding: 20px 0 5px 0;
+  padding: 20px 0 15px 0;
   background-color: white;
   z-index: 5;
   opacity: 0.95;
+  box-shadow: 0 5px 10px rgba(138, 138, 177, 0.2);
 
   .title {
     grid-column: 2 / span 5;
@@ -202,7 +202,6 @@ header {
   }
 
   nav {
-    justify-self: center;
     grid-column: 2 / span 6;
     overflow: hidden;
 

@@ -6,10 +6,10 @@ export default class PageService {
   private static AXIOS_CONFIG = { timeout: 5000 };
   private alertStore = useAlertStore();
   private static PAGES_URL =
-    "https://www.jojannekedekens.nl/wp-json/wp/v2/pages";
+    "https://www.jojannekedekens.nl/?rest_route=/wp/v2/pages";
 
   public async fetchPageBySlug(slug: string): Promise<Page | undefined> {
-    const URL = `${PageService.PAGES_URL}?slug=${slug}`;
+    const URL = `${PageService.PAGES_URL}&slug=${slug}`;
 
     try {
       const response = await axios.get(URL, PageService.AXIOS_CONFIG);

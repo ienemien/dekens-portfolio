@@ -7,7 +7,7 @@ import axios, { type AxiosResponse } from "axios";
 export default class BlogPostService {
   private static AXIOS_CONFIG = { timeout: 3000 };
   private static POSTS_URL =
-    "https://www.jojannekedekens.nl/wp-json/wp/v2/posts";
+    "https://www.jojannekedekens.nl/?rest_route=/wp/v2/posts";
   private static DEFAULT_POSTS_PER_PAGE = 10;
   private alertStore = useAlertStore();
 
@@ -24,7 +24,7 @@ export default class BlogPostService {
 
     try {
       const response: AxiosResponse = await axios.get(
-        `${BlogPostService.POSTS_URL}?page=${page}&per_page=${postsPerPage}&categories=${CategoryType.BLOGPOST}`,
+        `${BlogPostService.POSTS_URL}&page=${page}&per_page=${postsPerPage}&categories=${CategoryType.BLOGPOST}`,
         BlogPostService.AXIOS_CONFIG
       );
       blogPostResponse.posts = response.data;

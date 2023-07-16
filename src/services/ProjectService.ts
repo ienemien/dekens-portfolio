@@ -7,7 +7,7 @@ export default class ProjectService {
   private static AXIOS_CONFIG = { timeout: 3000 };
   private alertStore = useAlertStore();
   private static PROJECTS_URL =
-    "https://www.jojannekedekens.nl/wp-json/wp/v2/posts";
+    "https://www.jojannekedekens.nl/?rest_route=/wp/v2/posts";
   private static DEFAULT_PROJECTS_PER_PAGE = 9;
 
   public async fetchProjects(
@@ -31,7 +31,7 @@ export default class ProjectService {
       total: 0,
       posts: [],
     };
-    let url = `${ProjectService.PROJECTS_URL}?page=${page ?? 1}&per_page=${
+    let url = `${ProjectService.PROJECTS_URL}&page=${page ?? 1}&per_page=${
       per_page ?? ProjectService.DEFAULT_PROJECTS_PER_PAGE
     }`;
 
@@ -88,7 +88,7 @@ export default class ProjectService {
   }
 
   public async fetchProject(slug: string): Promise<Project | undefined> {
-    const URL = `${ProjectService.PROJECTS_URL}?slug=${slug}`;
+    const URL = `${ProjectService.PROJECTS_URL}&slug=${slug}`;
 
     try {
       const response: AxiosResponse = await axios.get(

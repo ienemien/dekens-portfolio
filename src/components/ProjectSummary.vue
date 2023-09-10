@@ -13,29 +13,31 @@ const props = defineProps<{
 }>();
 
 onMounted(async () => {
-  imgUrl.value = await mediaService.getProjectArchiveUrl(props.project);
+  imgUrl.value = await mediaService.getFeaturedMediaUrl(
+    props.project,
+    "medium"
+  );
 });
 </script>
 
 <template>
-  <article>
-    <RouterLink
-      :to="{ name: routeName ?? 'project', params: { slug: project?.slug } }"
-    >
-      <Transition>
-        <div>
-          <img v-if="imgUrl" :src="imgUrl" />
-          <div class="summary-info">
-            <h2 v-html="project?.title.rendered"></h2>
-          </div>
+  <RouterLink
+    :to="{ name: routeName ?? 'project', params: { slug: project?.slug } }"
+  >
+    <Transition>
+      <div>
+        <img v-if="imgUrl" :src="imgUrl" />
+        <div class="summary-info">
+          <h2 v-html="project?.title.rendered"></h2>
         </div>
-      </Transition>
-    </RouterLink>
-  </article>
+      </div>
+    </Transition>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>
-article {
+a {
+  display: block;
   position: relative;
   border-radius: 5px;
   border: 1pt solid lightgray;
@@ -51,19 +53,23 @@ article {
     max-width: 30%;
   }
 
-  a {
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
 
-    &:visited {
-      color: black;
-    }
+  &:visited {
+    color: black;
+  }
+
+  div {
+    width: 100%;
+    height: 100%;
 
     img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
 
     .summary-info {

@@ -15,7 +15,11 @@ const postDate = dayjs(props.post?.date).format("DD MMMM YYYY");
 const postDateTime = dayjs(props.post?.date).format("YYYY-MM-DD");
 
 onMounted(async () => {
-  imgUrl.value = await mediaService.getThumbnailUrl(props.post);
+  let img = await mediaService.getFeaturedMediaUrl(props.post, 'thumbnail');
+  if (!img) {
+    img = await mediaService.getProjectThumbnailUrl(props.post); //legacy project thumbnail
+  }
+  imgUrl.value = img;
 });
 </script>
 
@@ -58,6 +62,9 @@ article {
 
     img {
       margin: 0 0 5px 5px;
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
 
       @media screen and (min-width: 992px) {
         float: right;

@@ -1,4 +1,4 @@
-interface MediaSize {
+interface MediaSizeDetails {
   file: string;
   width: number;
   height: number;
@@ -6,18 +6,19 @@ interface MediaSize {
   source_url: string;
 }
 
+export type MediaSize =
+  | "medium"
+  | "large"
+  | "thumbnail"
+  | "full"
+  | "project-archive"
+  | "project-single"
+  | "project-thumbnail";
+
 export default interface MediaDetails {
   width: number;
   height: number;
   file: string;
-  sizes: {
-    medium: MediaSize;
-    large: MediaSize;
-    thumbnail: MediaSize;
-    "project-archive": MediaSize;
-    "project-single": MediaSize;
-    "project-thumbnail": MediaSize;
-    full: MediaSize;
-  };
+  sizes: Record<MediaSize, MediaSizeDetails>;
   image_meta: unknown;
 }

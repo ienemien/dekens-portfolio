@@ -74,7 +74,6 @@ onUpdated(() => {
       <h2 v-html="project?.title.rendered"></h2>
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
-    <div class="intro" v-html="project?.excerpt.rendered"></div>
     <div class="gallery" v-if="lightBoxImages && lightBoxImages.length > 0">
       <VueEasyLightbox
         scrollDisabled

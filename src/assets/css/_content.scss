@@ -27,14 +27,7 @@
     }
 
     figcaption {
-      margin: 15px 0 5px 0;
-      font-variant: small-caps;
-      max-width: 80vw;
-      text-align: center;
-
-      @media screen and (min-width: 768px) {
-        max-width: 40vw;
-      }
+      display: none;
     }
   }
 

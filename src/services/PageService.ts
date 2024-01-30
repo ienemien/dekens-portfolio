@@ -3,7 +3,7 @@ import { useAlertStore } from "@/stores/AlertStore";
 import axios from "axios";
 
 export default class PageService {
-  private static AXIOS_CONFIG = { timeout: 5000 };
+  private static AXIOS_CONFIG = { timeout: 10000 };
   private alertStore = useAlertStore();
   private static PAGES_URL =
     "https://www.jojannekedekens.nl/?rest_route=/wp/v2/pages";

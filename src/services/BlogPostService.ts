@@ -5,7 +5,7 @@ import { useAlertStore } from "@/stores/AlertStore";
 import axios, { type AxiosResponse } from "axios";
 
 export default class BlogPostService {
-  private static AXIOS_CONFIG = { timeout: 3000 };
+  private static AXIOS_CONFIG = { timeout: 10000 };
   private static POSTS_URL =
     "https://www.jojannekedekens.nl/?rest_route=/wp/v2/posts";
   private static DEFAULT_POSTS_PER_PAGE = 10;

@@ -4,7 +4,7 @@ import { useAlertStore } from "@/stores/AlertStore";
 import axios, { type AxiosResponse } from "axios";
 
 export default class ProjectService {
-  private static AXIOS_CONFIG = { timeout: 3000 };
+  private static AXIOS_CONFIG = { timeout: 10000 };
   private alertStore = useAlertStore();
   private static PROJECTS_URL =
     "https://www.jojannekedekens.nl/?rest_route=/wp/v2/posts";

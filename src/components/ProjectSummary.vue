@@ -25,7 +25,7 @@ onMounted(async () => {
     :to="{ name: routeName ?? 'project', params: { slug: project?.slug } }"
   >
     <Transition>
-      <div>
+      <div v-if="imgUrl || project?.title.rendered">
         <img v-if="imgUrl" :src="imgUrl" />
         <div class="summary-info">
           <h2 v-html="project?.title.rendered"></h2>
@@ -46,17 +46,16 @@ a {
   margin: 0 0 10px 0;
   aspect-ratio: 1 / 1;
   flex: 100%;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     flex: 30%;
     margin: 10px;
     max-width: 30%;
   }
-
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
-  cursor: pointer;
 
   &:visited {
     color: black;

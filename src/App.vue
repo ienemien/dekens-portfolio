@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import AppHeader from "@/components/AppHeader.vue";
 import AppAlertComponent from "./components/AppAlertComponent.vue";
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import AppAlertComponent from "./components/AppAlertComponent.vue";
       <AppAlertComponent></AppAlertComponent>
       <RouterView />
     </main>
+    <VueQueryDevtools />
   </div>
 </template>
 

@@ -36,27 +36,26 @@ export default class MediaService {
 
   public async getProjectThumbnailUrl(
     item: BlogPost | undefined
-  ): Promise<string | undefined> {
+  ): Promise<string> {
     const mediaUrl = item?._links["wp:attachment"]?.[0].href;
     if (mediaUrl) {
-      const media = await (
-        await axios.get(mediaUrl, MediaService.AXIOS_CONFIG)
-      ).data;
-      return media[0]?.media_details.sizes["project-thumbnail"]?.source_url;
+      return axios.get(mediaUrl, MediaService.AXIOS_CONFIG).then((res) => (res.data[0]?.media_details.sizes["project-thumbnail"]?.source_url));
     }
+    throw new Error(`No media url for post with id: ${item?.id}`);
   }
 
   public async getFeaturedMediaUrl(
     item: Page | Project | BlogPost | undefined,
     size?: MediaSize
-  ): Promise<string | undefined> {
+  ): Promise<string> {
     const mediaUrl = item?._links["wp:featuredmedia"]?.[0].href;
     if (mediaUrl) {
-      const media = (await axios.get<Media>(mediaUrl)).data;
-      return (
-        media.media_details.sizes[size ?? "large"]?.source_url ??
-        media.source_url
-      );
+      return axios.get<Media>(mediaUrl).then((res) => {
+        console.log(res);
+        return res.data.media_details.sizes[size ?? "large"]?.source_url ??
+        res.data.source_url
+      })
     }
+    throw new Error(`No media url for post with id: ${item?.id}`);
   }
 }

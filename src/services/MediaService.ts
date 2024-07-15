@@ -51,11 +51,10 @@ export default class MediaService {
     const mediaUrl = item?._links["wp:featuredmedia"]?.[0].href;
     if (mediaUrl) {
       return axios.get<Media>(mediaUrl).then((res) => {
-        console.log(res);
         return res.data.media_details.sizes[size ?? "large"]?.source_url ??
         res.data.source_url
       })
     }
-    throw new Error(`No media url for post with id: ${item?.id}`);
+    return '';
   }
 }

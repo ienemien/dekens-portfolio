@@ -8,7 +8,7 @@ const props = defineProps<{
 const router = useRouter();
 
 function goBack() {
-  props.backPage ? router.push(props.backPage) : router.back();
+  window.history.state.back ? router.back() : router.push(props.backPage ?? '/');
 }
 </script>
 

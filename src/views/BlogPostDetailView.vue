@@ -2,9 +2,8 @@
 import AppBackButton from "@/components/AppBackButton.vue";
 import type BlogPost from "@/model/BlogPost";
 import BlogPostService from "@/services/BlogPostService";
-import { computed } from "@vue/reactivity";
+import { computed, onMounted, ref } from "vue";
 import dayjs from "dayjs";
-import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const postService = new BlogPostService();
@@ -38,7 +37,7 @@ onMounted(async () => {
       <time :datetime="postDateTime">{{ postDate }}</time>
     </header>
     <div class="content" v-html="post?.content.rendered"></div>
-    <AppBackButton></AppBackButton>
+    <AppBackButton :back-page="route.meta['backPage']"></AppBackButton>
   </article>
 </template>
 

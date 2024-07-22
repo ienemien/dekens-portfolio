@@ -4,9 +4,8 @@ import AppBackButton from "@/components/AppBackButton.vue";
 import type Image from "@/model/Image";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
-import { computed } from "@vue/reactivity";
+import { computed, onMounted, onUpdated, ref } from "vue";
 import dayjs from "dayjs";
-import { onMounted, onUpdated, ref } from "vue";
 import VueEasyLightbox from "vue-easy-lightbox";
 import { useRoute } from "vue-router";
 
@@ -60,7 +59,7 @@ onUpdated(() => {
       image.setAttribute("onclick", `showLightbox(${index})`);
       return {
         src,
-        key: index,
+        key: index
       };
     });
     lightBoxInitialized.value = true;
@@ -115,7 +114,7 @@ onUpdated(() => {
       </VueEasyLightbox>
     </div>
     <div class="content" v-html="project?.content.rendered"></div>
-    <AppBackButton></AppBackButton>
+    <AppBackButton :back-page="route.meta['backPage']"></AppBackButton>
   </article>
 </template>
 

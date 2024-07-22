@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { type RouteLocationRaw, useRouter } from "vue-router";
+
+const props = defineProps<{
+  backPage?: RouteLocationRaw;
+}>();
 
 const router = useRouter();
+
 function goBack() {
-  router.back();
+  props.backPage ? router.push(props.backPage) : router.back();
 }
 </script>
 

@@ -1,8 +1,7 @@
 import { defineStore } from "pinia";
 import type { RouteLocationNormalized } from "vue-router";
 
-export const useNavigationHistory = defineStore({
-  id: "nav-history",
+export const useNavigationHistory = defineStore("nav-history", {
   state: () => ({
     lastVisitedRoutes: [] as RouteLocationNormalized[],
     scrollPositions: new Map(),

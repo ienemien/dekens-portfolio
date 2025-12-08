@@ -1,8 +1,7 @@
 import type Alert from "@/model/Alert";
 import { defineStore } from "pinia";
 
-export const useAlertStore = defineStore({
-  id: "alert",
+export const useAlertStore = defineStore("alert", {
   state: () => ({
     alerts: [] as Alert[],
   }),

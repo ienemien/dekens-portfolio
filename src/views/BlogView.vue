@@ -44,7 +44,7 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-@import "../assets/css/_load-posts.scss";
+@use "../assets/css/_load-posts.scss";
 .blogpost-list {
   display: grid;
   grid-template-columns: 1fr;

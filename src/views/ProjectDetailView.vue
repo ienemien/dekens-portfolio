@@ -119,8 +119,8 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/_content.scss";
-@import "../assets/css/_gallery.scss";
+@use "../assets/css/_content.scss";
+@use "../assets/css/_gallery.scss";
 
 article {
   padding: 15px;

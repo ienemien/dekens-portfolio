@@ -2,8 +2,7 @@ import type BlogPost from "@/model/BlogPost";
 import BlogPostService from "@/services/BlogPostService";
 import { defineStore } from "pinia";
 
-export const useBlogPostStore = defineStore({
-  id: "blogpost",
+export const useBlogPostStore = defineStore("blogpost", {
   state: () => ({
     pages: [{ pageNr: 0, posts: [] as BlogPost[] }],
     totalPages: 0,

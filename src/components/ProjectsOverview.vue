@@ -5,10 +5,10 @@ import type { CategoryType } from "@/model/CategoryType";
 import type Project from "@/model/Project";
 import ProjectService from "@/services/ProjectService";
 import { ref, watch, onMounted } from "vue";
-import { useRoute } from "vue-router";
 import ProjectSummary from "./ProjectSummary.vue";
 import AppPagination from "./AppPagination.vue";
 import AppLoader from "./AppLoader.vue";
+import { useRoute } from "vue-router";
 
 const projectService = new ProjectService();
 const projects = ref<Project[]>([]);
@@ -83,6 +83,6 @@ async function fetchProjects(): Promise<void> {
 </template>
 
 <style scoped lang="scss">
-@import "../assets/css/_load-posts.scss";
-@import "../assets/css/_project-list.scss";
+@use "../assets/css/_load-posts.scss";
+@use "../assets/css/_project-list.scss";
 </style>

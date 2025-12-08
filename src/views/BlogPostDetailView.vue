@@ -42,7 +42,7 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/_content.scss";
+@use "../assets/css/_content.scss";
 
 article {
   padding: 15px;
